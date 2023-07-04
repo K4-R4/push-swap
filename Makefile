@@ -22,9 +22,11 @@ $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
+	$(MAKE) -C $(LIBFT) clean
 	$(RM) $(OBJS)
 
 fclean: clean
+	$(MAKE) -C $(LIBFT) fclean
 	$(RM) $(NAME)
 
 re: fclean all
