@@ -6,7 +6,7 @@ SRCS = main.c
 OBJS = $(SRCS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS =
+LDFLAGS = 
 LIBFT = $(realpath ./libft)
 
 .PHONY: all clean fclean re
