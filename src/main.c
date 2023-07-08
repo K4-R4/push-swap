@@ -6,13 +6,13 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 23:35:34 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/04 23:35:51 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/08 17:36:55 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	return (0);
 }

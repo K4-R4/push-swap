@@ -3,17 +3,17 @@
 
 #include "libft.h"
 
-typedef struct	s_node
+typedef struct s_deque
 {
-	struct s_node	*prev;
-	struct s_node	*nex;
-	void	*content;
-}				t_node;
+	int	top;
+	int	bottom;
+	int	*buffer;
+}				t_deque;
 
-typedef struct	s_stack
+typedef struct s_stacks
 {
-	t_node	*top;
-	t_node	*bottom;
-}				t_stack;
+	t_deque a;
+	t_deque b;
+}				t_stacks;
 
 #endif
