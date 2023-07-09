@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:12:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/09 23:20:16 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/10 01:40:44 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_deque
 {
-    long long  sz;
+    long long   sz;
 	long long	front;
 	long long	back;
 	int	*buffer;

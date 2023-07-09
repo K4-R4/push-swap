@@ -6,17 +6,22 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:07:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/09 23:07:47 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/10 01:28:41 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "deque.h"
 
 void	deque_push_front(t_deque *deque, int data)
 {
 	if (deque_is_full(deque))
 		return ;
-	if (deque->front == 0)
+	if (deque->front == -1)
+	{
+		deque->front = 0;
+		deque->back = 0;
+	}
+	else if (deque->front == 0)
 		deque->front = deque->sz - 1;
 	else
 		deque->front--;
@@ -27,7 +32,12 @@ void	deque_push_back(t_deque *deque, int data)
 {
 	if (deque_is_full(deque))
 		return ;
-	if (deque->back == deque->sz - 1)
+	if (deque->front == -1)
+	{
+		deque->front = 0;
+		deque->back = 0;
+	}
+	else if (deque->back == deque->sz - 1)
 		deque->back = 0;
 	else
 		deque->back++;

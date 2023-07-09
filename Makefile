@@ -1,12 +1,14 @@
 NAME = push_swap
-SRCDIR = $(realpath .)
-INCDIR = $(SRCDIR)
+SRCDIR = ./src/
 OBJDIR = $(SRCDIR)
 SRCS = main.c
-OBJS = $(SRCS:.c=.o)
+OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
+TEST_SRCS = test.c deque.c deque_sub.c
+TEST_OBJS = $(addprefix $(OBJDIR), $(TEST_SRCS:.c=.o))
 
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = 
+INCLUDE = -I ./include -I ./libft//include
+LDFLAGS = -L libft -l ft
 LIBFT = $(realpath ./libft)
 
 .PHONY: all clean fclean re
@@ -15,11 +17,10 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(INCLUDE)
 
-$(OBJDIR)/%.o : $(SRCDIR)/%.c
-	[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c -o $@ $<
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT) clean
@@ -28,5 +29,9 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
 	$(RM) $(NAME)
+
+test: $(TEST_OBJS)
+	$(MAKE) -C $(LIBFT)
+	$(CC) $(CFLAGS) $(TEST_OBJS) $(LDFLAGS) -o $@
 
 re: fclean all

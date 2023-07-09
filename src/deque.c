@@ -6,14 +6,15 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 21:36:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/09 23:08:00 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/10 01:40:54 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "deque.h"
 
 void	deque_init(t_deque *deque, long long sz)
 {
+	deque->sz = sz;
 	deque->front = -1;
 	deque->back = 0;
 	deque->buffer = ft_calloc(sz, sizeof (int));
