@@ -2,14 +2,7 @@
 # define PUSH_SWAP_H
 
 #include "libft.h"
-
-typedef struct s_deque
-{
-    long long  sz;
-	long long	front;
-	long long	back;
-	int	*buffer;
-}				t_deque;
+#include "deque.h"
 
 typedef struct s_stacks
 {
