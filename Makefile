@@ -7,7 +7,7 @@ TEST_SRCS = test.c deque.c deque_sub.c
 TEST_OBJS = $(addprefix $(OBJDIR), $(TEST_SRCS:.c=.o))
 
 CFLAGS = -Wall -Wextra -Werror
-INCLUDE = -I ./include -I ./libft//include
+INCLUDE = -I ./include/ -I ./libft/include/
 LDFLAGS = -L libft -l ft
 LIBFT = $(realpath ./libft)
 

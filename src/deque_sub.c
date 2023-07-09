@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:07:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/10 01:28:41 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/10 02:08:50 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	deque_push_front(t_deque *deque, int data)
 		deque->back = 0;
 	}
 	else if (deque->front == 0)
-		deque->front = deque->sz - 1;
+		deque->front = deque->capacity - 1;
 	else
 		deque->front--;
 	deque->buffer[deque->front] = data;
+	deque->sz++;
 }
 
 void	deque_push_back(t_deque *deque, int data)
@@ -37,11 +38,12 @@ void	deque_push_back(t_deque *deque, int data)
 		deque->front = 0;
 		deque->back = 0;
 	}
-	else if (deque->back == deque->sz - 1)
+	else if (deque->back == deque->capacity - 1)
 		deque->back = 0;
 	else
 		deque->back++;
 	deque->buffer[deque->back] = data;
+	deque->sz++;
 }
 
 int		*deque_pop_front(t_deque *deque)
@@ -56,10 +58,11 @@ int		*deque_pop_front(t_deque *deque)
 		deque->front = -1;
 		deque->back = -1;
 	}
-	else if (deque->front == deque->sz - 1)
+	else if (deque->front == deque->capacity - 1)
 		deque->front = 0;
 	else
 		deque->front++;
+	deque->sz--;
 	return (data);
 }
 
@@ -76,8 +79,9 @@ int		*deque_pop_back(t_deque *deque)
 		deque->back = -1;
 	}
 	else if (deque->back == 0)
-		deque->back = deque->sz - 1;
+		deque->back = deque->capacity - 1;
 	else
 		deque->back--;
+	deque->sz--;
 	return (data);
 }
