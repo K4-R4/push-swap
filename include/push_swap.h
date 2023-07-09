@@ -5,8 +5,9 @@
 
 typedef struct s_deque
 {
-	int	top;
-	int	bottom;
+    long long  sz;
+	long long	front;
+	long long	back;
 	int	*buffer;
 }				t_deque;
 
