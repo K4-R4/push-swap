@@ -3,7 +3,8 @@ SRCDIR = ./src/
 OBJDIR = $(SRCDIR)
 SRCS = main.c
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
-TEST_SRCS = test.c deque.c deque_sub.c
+TEST_SRCS = deque.c deque_sub.c stack_operations1.c \
+		stack_operations2.c stack_operations3.c
 TEST_OBJS = $(addprefix $(OBJDIR), $(TEST_SRCS:.c=.o))
 
 CFLAGS = -Wall -Wextra -Werror
@@ -30,8 +31,12 @@ fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
 	$(RM) $(NAME)
 
-test: $(TEST_OBJS)
+test: testc $(TEST_OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) $(TEST_OBJS) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) test.c $(TEST_OBJS) $(INCLUDE) $(LDFLAGS) -o $@
+	./test
+
+testc:
+	$(RM) test $(wildcard ./src/*.o)
 
 re: fclean all
