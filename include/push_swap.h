@@ -5,4 +5,6 @@
 #include "stack.h"
 #include "deque.h"
 
+bool	is_valid_arg(char *arg);
+
 #endif
