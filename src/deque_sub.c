@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:07:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/10 02:08:50 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/11 14:14:44 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	deque_push_back(t_deque *deque, int data)
 	deque->sz++;
 }
 
-int		*deque_pop_front(t_deque *deque)
+long long		*deque_pop_front(t_deque *deque)
 {
-	int		*data;
+	long long		*data;
 
 	if (deque_is_empty(deque))
 		return (NULL);
@@ -66,9 +66,9 @@ int		*deque_pop_front(t_deque *deque)
 	return (data);
 }
 
-int		*deque_pop_back(t_deque *deque)
+long long		*deque_pop_back(t_deque *deque)
 {
-	int		*data;
+	long long		*data;
 
 	if (deque_is_empty(deque))
 		return (NULL);

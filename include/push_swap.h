@@ -5,6 +5,7 @@
 #include "stack.h"
 #include "deque.h"
 
-bool	is_valid_arg(char *arg);
+bool	is_valid_arg(char **num_list);
+bool	parse_arg(t_stacks *stacks, char *arg);
 
 #endif

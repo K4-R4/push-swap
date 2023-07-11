@@ -1,7 +1,9 @@
 NAME = push_swap
 SRCDIR = ./src/
 OBJDIR = $(SRCDIR)
-SRCS = main.c
+SRCS = main.c deque.c deque_sub.c stack_operations1.c \
+	   stack_operations2.c stack_operations3.c \
+	   parse_args.c validate_args.c
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 TEST_SRCS = deque.c deque_sub.c stack_operations1.c \
 		stack_operations2.c stack_operations3.c

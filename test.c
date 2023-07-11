@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:27:02 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/10 23:00:03 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:16:14 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		main(void)
 
 void	deque_print_all(t_deque *deque)
 {
-	int		*ele;
+	long long		*ele;
 
 	printf("========================\n");
 	while (true)
@@ -33,7 +33,7 @@ void	deque_print_all(t_deque *deque)
 		ele = deque_pop_front(deque);
 		if (!ele)
 			return ;
-		printf("%d\n", *ele);
+		printf("%lld\n", *ele);
 	}
 }
 
