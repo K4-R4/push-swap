@@ -3,7 +3,7 @@ SRCDIR = ./src/
 OBJDIR = $(SRCDIR)
 SRCS = main.c deque1.c deque2.c stack_operations1.c \
 	   stack_operations2.c stack_operations3.c \
-	   parse_args.c validate_args.c
+	   parse_args.c validate_args.c lis.c
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 TEST_SRCS = deque1.c deque2.c stack_operations1.c \
 		stack_operations2.c stack_operations3.c

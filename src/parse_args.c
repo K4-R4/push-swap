@@ -6,16 +6,15 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 19:04:41 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/11 21:12:52 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-static size_t	get_arg_count(char **num_list)
+static long long	get_arg_count(char **num_list)
 {
-	size_t	cnt;
+	long long	cnt;
 
 	cnt = 0;
 	while (*num_list++)
@@ -34,20 +33,12 @@ static void		compression_helper(t_stacks *stacks, int *buffer)
 	{
 		idx = 0;
 		cnt = 0;
-		//printf("===============\n");
 		while (idx < stacks->a.capacity)
 		{
 			if (buffer[idx] < buffer[fixed])
 				cnt++;
 			idx++;
 		}
-		/*
-		for(int i = 0; i < stacks->a.capacity; i++)
-		{
-			printf("%d: %d\n", i, buffer[i]);
-		}
-		printf("%d COMPRESSED TO %lld\n", buffer[fixed], cnt);
-		*/
 		deque_push_back(&stacks->a, cnt);
 		fixed++;
 	}
@@ -56,7 +47,7 @@ static void		compression_helper(t_stacks *stacks, int *buffer)
 static bool		compression(t_stacks *stacks , char **num_list)
 {
 	int		*buffer;
-	long long	idx;
+	size_t	idx;
 
 	buffer = (int *)ft_calloc(stacks->a.capacity, sizeof (int));
 	if (!buffer)
