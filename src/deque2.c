@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque_sub.c                                        :+:      :+:    :+:   */
+/*   deque2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:07:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 14:14:44 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/11 23:36:41 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "deque.h"
 
-void	deque_push_front(t_deque *deque, int data)
+void	deque_push_front(t_deque *deque, long long data)
 {
 	if (deque_is_full(deque))
 		return ;
@@ -29,7 +29,7 @@ void	deque_push_front(t_deque *deque, int data)
 	deque->sz++;
 }
 
-void	deque_push_back(t_deque *deque, int data)
+void	deque_push_back(t_deque *deque, long long data)
 {
 	if (deque_is_full(deque))
 		return ;
