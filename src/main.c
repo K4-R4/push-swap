@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 23:35:34 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 16:16:34 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:24:03 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	main(int argc, char **argv)
 		ft_printf("invalid usage\n");
 		return (0);
 	}
-	ft_printf("%d\n", parse_arg(&stacks, argv[1]));
+	if (!parse_arg(&stacks, argv[1]))
+	{
+		exit(1);
+	}
 	deque_print_all(&stacks.a);
 	return (0);
 }
