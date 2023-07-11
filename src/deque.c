@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 21:36:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 17:55:51 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:20:04 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	deque_init(t_deque *deque, long long capacity)
 	deque->sz = 0;
 	deque->front = -1;
 	deque->back = 0;
-	deque->buffer = ft_calloc(capacity, sizeof (int));
+	deque->buffer = (long long *)ft_calloc(capacity, sizeof (long long));
 }
 
 bool	deque_is_full(t_deque *deque)
