@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/16 18:41:05 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/16 19:00:22 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,8 @@ static void	sort_small_3_helper(t_stacks *stacks, char cur_sta, long long *sta[]
 		return ;
 	else if (*sta[0] < *sta[1] && *sta[1] > *sta[2])
 	{
-		if (cur_sta == 'a')
-		{
-			stack_rra(stacks);
-			stack_sa(stacks);
-		}
-		else
-		{
-			stack_rrb(stacks);
-			stack_sb(stacks);
-		}
+		stack_rrotate(stacks, cur_sta);
+		stack_swap(stacks, cur_sta);
 	}
 }
 
@@ -68,10 +60,5 @@ void	sort_small_2(t_stacks *stacks, char cur_sta)
 		sta[1] = deque_get_front(&stacks->b);
 	}
 	if (*sta[0] < *sta[1])
-	{
-		if (cur_sta == 'a')
-			stack_sa(stacks);
-		else
-			stack_sb(stacks);
-	}
+		stack_swap(stacks, cur_sta);
 }
