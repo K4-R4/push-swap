@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:12:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 23:26:01 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 00:42:17 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ bool	deque_is_empty(t_deque *deque);
 void	deque_free_buffer(t_deque *deque);
 void	deque_push_front(t_deque *deque, long long data);
 void	deque_push_back(t_deque *deque, long long data);
-long long		*deque_pop_front(t_deque *deque);
-long long		*deque_pop_back(t_deque *deque);
-long long		*deque_get_front(t_deque *deque);
-long long		*deque_get_back(t_deque *deque);
+long long		deque_pop_front(t_deque *deque);
+long long		deque_pop_back(t_deque *deque);
+long long	    deque_get_at(t_deque *deque, long long idx);
 
 #endif

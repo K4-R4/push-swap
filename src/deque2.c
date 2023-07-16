@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:07:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 23:36:41 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 00:48:06 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	deque_push_back(t_deque *deque, long long data)
 	deque->sz++;
 }
 
-long long		*deque_pop_front(t_deque *deque)
+long long		deque_pop_front(t_deque *deque)
 {
-	long long		*data;
+	long long		data;
 
 	if (deque_is_empty(deque))
-		return (NULL);
-	data = &deque->buffer[deque->front];
+		return (-1);
+	data = deque->buffer[deque->front];
 	if (deque->front == deque->back)
 	{
 		deque->front = -1;
@@ -66,13 +66,13 @@ long long		*deque_pop_front(t_deque *deque)
 	return (data);
 }
 
-long long		*deque_pop_back(t_deque *deque)
+long long		deque_pop_back(t_deque *deque)
 {
-	long long		*data;
+	long long		data;
 
 	if (deque_is_empty(deque))
-		return (NULL);
-	data = &deque->buffer[deque->back];
+		return (-1);
+	data = deque->buffer[deque->back];
 	if (deque->front == deque->back)
 	{
 		deque->front = -1;

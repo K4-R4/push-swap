@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:27:02 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/16 18:51:18 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 01:00:55 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,10 @@ int		main(void)
 
 void	deque_print_all(t_deque *deque)
 {
-	long long		*ele;
-
 	printf("========================\n");
-	while (true)
+	for(int i = 0; i < deque->sz; i++)
 	{
-		ele = deque_pop_front(deque);
-		if (!ele)
-			return ;
-		printf("%lld\n", *ele);
+		printf("ele: %lld\n", deque_get_at(deque, i));
 	}
 }
 
@@ -47,10 +42,6 @@ void	test_stack()
 	for(int i = 0; i < 10; i++)
 		deque_push_back(&stacks.a, i);
 	for(int i = 0; i < 10; i++)
-		stack_push(&stacks, 'b');
-	for(int i = 0; i < 5; i++)
-		stack_rr(&stacks);
-	for(int i = 0; i < 5; i++)
 		stack_push(&stacks, 'b');
 	for(int i = 0; i < 5; i++)
 		stack_push(&stacks, 'a');

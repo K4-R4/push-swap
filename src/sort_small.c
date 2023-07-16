@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/16 19:00:22 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 00:18:36 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ static void	sort_small_3_helper(t_stacks *stacks, char cur_sta, long long *sta[]
 	else if (*sta[0] < *sta[1] && *sta[1] > *sta[2])
 	{
 		stack_rrotate(stacks, cur_sta);
+		stack_swap(stacks, cur_sta);
+	}
+	else if (*sta[0] > *sta[1] && *sta[1] < *sta[2])
+		stack_swap(stacks, cur_sta);
+	else if (*sta[0] < *sta[1] && *sta[1] > *sta[2])
+		stack_rrotate(stacks, cur_sta);
+	else if (*sta[0] > *sta[1] && *sta[1] < *sta[2])
+		stack_rotate(stacks, cur_sta);
+	else if (*sta[0] > *sta[1] && *sta[1] > *sta[2])
+	{
+		stack_rotate(stacks, cur_sta);
 		stack_swap(stacks, cur_sta);
 	}
 }
