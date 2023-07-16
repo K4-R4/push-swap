@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 22:05:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/12 00:17:27 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/16 17:14:18 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 // Move elements of the specified closed section from stack A to stack B
-static void		transfer_stack_range(t_stacks *stacks, long long start, long long end)
+static void		quick_sort(t_stacks *stacks, char cur_sta, long long start, long long end)
 {
 	long long	cnt;
 	long long	*num;
@@ -35,19 +35,6 @@ static void		transfer_stack_range(t_stacks *stacks, long long start, long long e
 	}
 }
 
-static void		transfer_back_stack(t_stacks *stacks)
-{
-}
-
 void	sort(t_stacks *stacks)
 {
-	long long	pivot1;
-	long long	pivot2;
-
-	(void)pivot2;
-	pivot1 = stacks->a.capacity / 3;
-	pivot2 = stacks->a.capacity - pivot1;
-	transfer_stack_range(stacks, pivot2, stacks->a.capacity - 1);
-	transfer_stack_range(stacks, pivot1, pivot2 - 1);
-	transfer_stack_range(stacks, 0, pivot1 - 1);
 }
