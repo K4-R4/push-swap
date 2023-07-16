@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:27:02 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 16:16:14 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:51:18 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	test_stack()
 	for(int i = 0; i < 10; i++)
 		deque_push_back(&stacks.a, i);
 	for(int i = 0; i < 10; i++)
-		stack_pb(&stacks);
+		stack_push(&stacks, 'b');
 	for(int i = 0; i < 5; i++)
 		stack_rr(&stacks);
 	for(int i = 0; i < 5; i++)
-		stack_pb(&stacks);
+		stack_push(&stacks, 'b');
 	for(int i = 0; i < 5; i++)
-		stack_pa(&stacks);
+		stack_push(&stacks, 'a');
 	printf("STACK A\n");
 	deque_print_all(&stacks.a);
 	printf("STACK B\n");

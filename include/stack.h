@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 22:15:33 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/10 22:23:39 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:50:22 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@ typedef struct s_stacks
 	t_deque b;
 }				t_stacks;
 
-void	stack_sa(t_stacks *stacks);
-void	stack_sb(t_stacks *stacks);
+void	stack_swap(t_stacks *stacks, char sta);
 void	stack_ss(t_stacks *stacks);
-void	stack_pa(t_stacks *stacks);
-void	stack_pb(t_stacks *stacks);
-void	stack_ra(t_stacks *stacks);
-void	stack_rb(t_stacks *stacks);
+void	stack_push(t_stacks *stacks, char sta);
+void	stack_rotate(t_stacks *stacks, char sta);
 void	stack_rr(t_stacks *stacks);
-void	stack_rra(t_stacks *stacks);
-void	stack_rrb(t_stacks *stacks);
+void	stack_rrotate(t_stacks *stacks, char sta);
 void	stack_rrr(t_stacks *stacks);
 
 #endif

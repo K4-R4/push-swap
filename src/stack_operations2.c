@@ -6,35 +6,35 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 22:16:59 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/10 22:20:42 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:52:15 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "deque.h"
 #include "stack.h"
 
-void	stack_ra(t_stacks *stacks)
+void	stack_rrotate(t_stacks *stacks, char sta)
 {
-	int		a_first;
+	int		sta_last;
 
-	if (deque_is_empty(&stacks->a))
-		return ;
-	a_first = *deque_pop_front(&stacks->a);
-	deque_push_back(&stacks->a, a_first);
+	if (sta == 'a')
+	{
+		if (deque_is_empty(&stacks->a))
+			return ;
+		sta_last = *deque_pop_back(&stacks->a);
+		deque_push_front(&stacks->a, sta_last);
+	}
+	else
+	{
+		if (deque_is_empty(&stacks->b))
+			return ;
+		sta_last = *deque_pop_back(&stacks->b);
+		deque_push_front(&stacks->b, sta_last);
+	}
 }
 
-void	stack_rb(t_stacks *stacks)
+void	stack_rrr(t_stacks *stacks)
 {
-	int		b_first;
-
-	if (deque_is_empty(&stacks->b))
-		return ;
-	b_first = *deque_pop_front(&stacks->b);
-	deque_push_back(&stacks->b, b_first);
-}
-
-void	stack_rr(t_stacks *stacks)
-{
-	stack_ra(stacks);
-	stack_rb(stacks);
+	stack_rrotate(stacks, 'a');
+	stack_rrotate(stacks, 'b');
 }
