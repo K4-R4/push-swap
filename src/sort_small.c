@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 11:13:53 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:06:23 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	sort_small_5(t_stacks *stacks, char cur_sta)
 {
 	char		another_sta;
 	long long	pivot;
-	long long	ele;
 	long long	idx;
 
 	another_sta = 'a' + (cur_sta == 'a');
@@ -24,11 +23,11 @@ void	sort_small_5(t_stacks *stacks, char cur_sta)
 	idx = 0;
 	while (idx < 5)
 	{
-		ele = stack_get_at(stacks, cur_sta, idx);
-		if (ele > pivot)
+		if (stack_get_at(stacks, cur_sta, 0) > pivot)
 			stack_rotate(stacks, cur_sta);
 		else
 			stack_push(stacks, another_sta);
+		idx++;
 	}
 	sort_small_2(stacks, cur_sta);
 	sort_small_3(stacks, another_sta);
@@ -41,11 +40,11 @@ void	sort_small_5(t_stacks *stacks, char cur_sta)
 	}
 }
 
+#include "push_swap.h"
 void	sort_small_4(t_stacks *stacks, char cur_sta)
 {
 	char		another_sta;
 	long long	pivot;
-	long long	ele;
 	long long	idx;
 
 	another_sta = 'a' + (cur_sta == 'a');
@@ -53,12 +52,21 @@ void	sort_small_4(t_stacks *stacks, char cur_sta)
 	idx = 0;
 	while (idx < 4)
 	{
-		ele = stack_get_at(stacks, cur_sta, idx);
-		if (ele > pivot)
+		long long tmp = stack_get_at(stacks, cur_sta, 0);
+		ft_printf("tmp = %d, pivot = %d, tmp > pivot = %d\n", tmp, pivot, tmp > pivot);
+		if (tmp > pivot)
 			stack_rotate(stacks, cur_sta);
 		else
 			stack_push(stacks, another_sta);
+		idx++;
 	}
+	/*
+	ft_printf("|||||||||||||||||||||||||||||||||||\n");
+	ft_printf("stacks after split\n");
+	deque_print_all(&stacks->a);
+	deque_print_all(&stacks->b);
+	ft_printf("|||||||||||||||||||||||||||||||||||\n");
+	*/
 	sort_small_2(stacks, cur_sta);
 	sort_small_2(stacks, another_sta);
 	idx = 0;

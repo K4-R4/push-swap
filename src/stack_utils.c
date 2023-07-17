@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 09:49:47 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 11:13:31 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:23:06 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ long long	stack_get_min(t_stacks *stacks, char cur_sta, long long n)
 		ele = stack_get_at(stacks, cur_sta, idx);
 		if (ele < sta_min)
 			sta_min = ele;
+		idx++;
 	}
 	return (sta_min);
 }
