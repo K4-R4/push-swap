@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_small.c                                       :+:      :+:    :+:   */
+/*   sort_few_elements.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 13:19:29 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:07:46 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 
-void	sort_small_5(t_stacks *stacks, char cur_sta)
+void	sort_5(t_stacks *stacks, char cur_sta)
 {
 	char		another_sta;
 	long long	pivot;
@@ -29,8 +29,8 @@ void	sort_small_5(t_stacks *stacks, char cur_sta)
 			stack_push(stacks, another_sta);
 		idx++;
 	}
-	sort_small_3(stacks, cur_sta);
-	sort_small_2(stacks, another_sta);
+	sort_3(stacks, cur_sta);
+	sort_2(stacks, another_sta);
 	idx = 0;
 	while (idx < 3)
 	{
@@ -40,7 +40,7 @@ void	sort_small_5(t_stacks *stacks, char cur_sta)
 	}
 }
 
-void	sort_small_4(t_stacks *stacks, char cur_sta)
+void	sort_4(t_stacks *stacks, char cur_sta)
 {
 	char		another_sta;
 	long long	pivot;
@@ -57,8 +57,8 @@ void	sort_small_4(t_stacks *stacks, char cur_sta)
 			stack_push(stacks, another_sta);
 		idx++;
 	}
-	sort_small_2(stacks, cur_sta);
-	sort_small_2(stacks, another_sta);
+	sort_2(stacks, cur_sta);
+	sort_2(stacks, another_sta);
 	idx = 0;
 	while (idx < 2)
 	{
@@ -68,7 +68,7 @@ void	sort_small_4(t_stacks *stacks, char cur_sta)
 	}
 }
 
-void	sort_small_3(t_stacks *stacks, char cur_sta)
+void	sort_3(t_stacks *stacks, char cur_sta)
 {
 	long long	sta[3];
 	long long	idx;
@@ -97,7 +97,7 @@ void	sort_small_3(t_stacks *stacks, char cur_sta)
 	}
 }
 
-void	sort_small_2(t_stacks *stacks, char cur_sta)
+void	sort_2(t_stacks *stacks, char cur_sta)
 {
 	long long	sta[2];
 

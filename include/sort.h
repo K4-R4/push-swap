@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 09:07:02 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 11:15:20 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:07:02 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include "stack.h"
 
 void	sort(t_stacks *stacks);
-void	sort_small_2(t_stacks *stacks, char cur_sta);
-void	sort_small_3(t_stacks *stacks, char cur_sta);
-void	sort_small_4(t_stacks *stacks, char cur_sta);
-void	sort_small_5(t_stacks *stacks, char cur_sta);
+void	sort_2(t_stacks *stacks, char cur_sta);
+void	sort_3(t_stacks *stacks, char cur_sta);
+void	sort_4(t_stacks *stacks, char cur_sta);
+void	sort_5(t_stacks *stacks, char cur_sta);
 
 #endif
