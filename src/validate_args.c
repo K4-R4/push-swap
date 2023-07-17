@@ -6,11 +6,27 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:28:29 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 16:12:28 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:01:52 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static size_t	count_digits(long long nbr)
+{
+	int	l;
+	l = 0;
+	if (nbr == 0)
+		return (1);
+	if (nbr < 0)
+		nbr *= -1;
+	while (nbr > 0)
+	{
+		nbr /= 10;
+		l++;
+	}
+	return (l);
+}
 
 // args must be separated by space(s)
 bool	is_valid_arg(char **num_list)
@@ -23,7 +39,7 @@ bool	is_valid_arg(char **num_list)
 	{
 		is_negative = *num_list[0] == '-';
 		if (ft_strlen(*num_list) - is_negative !=
-				(unsigned int)get_digit_count(ft_atoi(*num_list), 10))
+				count_digits(ft_atoi(*num_list)))
 			return (false);
 		num_list++;
 	}
