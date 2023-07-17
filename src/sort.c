@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 22:05:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 14:07:15 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:40:17 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,6 @@ void	sort(t_stacks *stacks)
 		sort_4(stacks, 'a');
 	else if (sz == 5)
 		sort_5(stacks, 'a');
+	else
+		sort_many(stacks);
 }
