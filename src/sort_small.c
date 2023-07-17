@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 12:06:23 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:57:04 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	sort_small_5(t_stacks *stacks, char cur_sta)
 			stack_push(stacks, another_sta);
 		idx++;
 	}
-	sort_small_2(stacks, cur_sta);
-	sort_small_3(stacks, another_sta);
+	sort_small_3(stacks, cur_sta);
+	sort_small_2(stacks, another_sta);
 	idx = 0;
 	while (idx < 3)
 	{
@@ -40,7 +40,6 @@ void	sort_small_5(t_stacks *stacks, char cur_sta)
 	}
 }
 
-#include "push_swap.h"
 void	sort_small_4(t_stacks *stacks, char cur_sta)
 {
 	char		another_sta;
@@ -52,21 +51,12 @@ void	sort_small_4(t_stacks *stacks, char cur_sta)
 	idx = 0;
 	while (idx < 4)
 	{
-		long long tmp = stack_get_at(stacks, cur_sta, 0);
-		ft_printf("tmp = %d, pivot = %d, tmp > pivot = %d\n", tmp, pivot, tmp > pivot);
-		if (tmp > pivot)
+		if (stack_get_at(stacks, cur_sta, 0) > pivot)
 			stack_rotate(stacks, cur_sta);
 		else
 			stack_push(stacks, another_sta);
 		idx++;
 	}
-	/*
-	ft_printf("|||||||||||||||||||||||||||||||||||\n");
-	ft_printf("stacks after split\n");
-	deque_print_all(&stacks->a);
-	deque_print_all(&stacks->b);
-	ft_printf("|||||||||||||||||||||||||||||||||||\n");
-	*/
 	sort_small_2(stacks, cur_sta);
 	sort_small_2(stacks, another_sta);
 	idx = 0;
@@ -113,6 +103,6 @@ void	sort_small_2(t_stacks *stacks, char cur_sta)
 
 	sta[0] = stack_get_at(stacks, cur_sta, 0);
 	sta[1] = stack_get_at(stacks, cur_sta, 1);
-	if (sta[0] < sta[1])
+	if (sta[0] > sta[1])
 		stack_swap(stacks, cur_sta);
 }

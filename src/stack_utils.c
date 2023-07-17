@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 09:49:47 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 11:23:06 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:44:05 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ long long	stack_get_min(t_stacks *stacks, char cur_sta, long long n)
 	long long	sta_min;
 
 	idx = 0;
-	sta_min = LLONG_MIN;
+	sta_min = LLONG_MAX;
 	while (idx < n)
 	{
 		ele = stack_get_at(stacks, cur_sta, idx);
