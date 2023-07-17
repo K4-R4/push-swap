@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 12:57:04 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:19:29 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,18 @@ void	sort_small_3(t_stacks *stacks, char cur_sta)
 		sta[idx] = stack_get_at(stacks, cur_sta, idx);
 		idx++;
 	}
-	if (sta[0] < sta[1] && sta[1] > sta[2])
+	if (sta[0] < sta[1] && sta[1] > sta[2] && sta[2] > sta[0])
 	{
 		stack_rrotate(stacks, cur_sta);
 		stack_swap(stacks, cur_sta);
 	}
-	else if (sta[0] > sta[1] && sta[1] < sta[2])
+	else if (sta[0] > sta[1] && sta[1] < sta[2] && sta[2] > sta[0])
 		stack_swap(stacks, cur_sta);
-	else if (sta[0] < sta[1] && sta[1] > sta[2])
+	else if (sta[0] < sta[1] && sta[1] > sta[2] && sta[2] < sta[0])
 		stack_rrotate(stacks, cur_sta);
-	else if (sta[0] > sta[1] && sta[1] < sta[2])
+	else if (sta[0] > sta[1] && sta[1] < sta[2] && sta[2] < sta[0])
 		stack_rotate(stacks, cur_sta);
-	else if (sta[0] > sta[1] && sta[1] > sta[2])
+	else if (sta[0] > sta[1] && sta[1] > sta[2] && sta[2] < sta[0])
 	{
 		stack_rotate(stacks, cur_sta);
 		stack_swap(stacks, cur_sta);
