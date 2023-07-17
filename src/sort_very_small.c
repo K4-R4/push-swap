@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_small.c                                       :+:      :+:    :+:   */
+/*   sort_very_small.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 01:04:44 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:56:45 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "deque.h"
-#include "push_swap.h"
+#include "stack.h"
 
-static void	sort_small_3_helper(t_stacks *stacks, char cur_sta, long long sta[])
+void	sort_small_3(t_stacks *stacks, char cur_sta)
 {
-	if (sta[0] < sta[1] && sta[1] < sta[2])
-		return ;
-	else if (sta[0] < sta[1] && sta[1] > sta[2])
+	long long	sta[3];
+	long long	idx;
+
+	idx = 0;
+	while (idx < 3)
+	{
+		sta[idx] = stack_get_at(stacks, cur_sta, idx);
+		idx++;
+	}
+	if (sta[0] < sta[1] && sta[1] > sta[2])
 	{
 		stack_rrotate(stacks, cur_sta);
 		stack_swap(stacks, cur_sta);
@@ -33,28 +39,6 @@ static void	sort_small_3_helper(t_stacks *stacks, char cur_sta, long long sta[])
 		stack_rotate(stacks, cur_sta);
 		stack_swap(stacks, cur_sta);
 	}
-}
-
-void	sort_small_3(t_stacks *stacks, char cur_sta)
-{
-	long long	sta[3];
-	long long	idx;
-
-	idx = 0;
-	while (idx < 3)
-	{
-		if (cur_sta == 'a')
-		{
-			sta[idx] = deque_pop_front(&stacks->a);
-			deque_push_back(&stacks->a, sta[idx]);
-		}
-		else
-		{
-			sta[idx] = deque_pop_front(&stacks->b);
-			deque_push_back(&stacks->b, sta[idx]);
-		}
-	}
-	sort_small_3_helper(stacks, cur_sta, sta);
 }
 
 void	sort_small_2(t_stacks *stacks, char cur_sta)

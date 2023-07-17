@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_small.c                                       :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 09:04:36 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 10:15:44 by tkuramot         ###   ########.fr       */
+/*   Created: 2023/07/17 09:30:59 by tkuramot          #+#    #+#             */
+/*   Updated: 2023/07/17 10:00:06 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
-#include "stack.h"
 
-// Push the smallest two elements to the other stacks and
-// sort the elements in the stacks respectively
-void	sort_small_4(t_stacks *stacks, char cur_sta)
+// Get the min value of the stack from top n elements
+long long	get_stack_min(t_stacks *stacks, char cur_sta, long long n)
 {
-	long long	pivot;
-	long long	tmp;
 	long long	idx;
+	long long	tmp;
+	long long	sta_min;
 
-	pivot = get_stack_min(stacks, cur_sta, 4) + 1;
 	idx = 0;
-	while (idx < 4)
+	sta_min = LLONG_MAX;
+	while (idx < n)
 	{
 		tmp = stack_get_at(stacks, cur_sta, idx);
-		if (tmp > pivot)
-			stack_rotate(stacks, 'a' + (cur_sta == 'a'));
-		else
-			stack_push(stacks, 'a' + (cur_sta == 'a'));
+		if (tmp < sta_min)
+			sta_min = tmp;
 	}
-	sort_small_2(stacks, 'a');
-	sort_small_2(stacks, 'b');
+	return (sta_min);
 }
-

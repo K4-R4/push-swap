@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque.c                                            :+:      :+:    :+:   */
+/*   deque_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 21:36:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/11 19:20:04 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:50:56 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,14 @@ bool	deque_is_empty(t_deque *deque)
 void	deque_free_buffer(t_deque *deque)
 {
 	free(deque->buffer);
+}
+
+long long	deque_get_at(t_deque *deque, long long idx)
+{
+	if (deque_is_empty(deque))
+		return (-1);
+	if (deque->front + idx < deque->capacity)
+		return deque->buffer[deque->front + idx];
+	else
+		return deque->buffer[(deque->front + idx) % deque->capacity];
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque2.c                                           :+:      :+:    :+:   */
+/*   deque_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:07:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 08:48:28 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:51:00 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,4 @@ long long		deque_pop_back(t_deque *deque)
 		deque->back--;
 	deque->sz--;
 	return (data);
-}
-
-long long	deque_get_at(t_deque *deque, long long idx)
-{
-	if (deque_is_empty(deque))
-		return (-1);
-	if (deque->front + idx < deque->capacity)
-		return deque->buffer[deque->front + idx];
-	else
-		return deque->buffer[(deque->front + idx) % deque->capacity];
 }
