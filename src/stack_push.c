@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque3.c                                           :+:      :+:    :+:   */
+/*   stack_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 22:31:29 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 00:40:10 by tkuramot         ###   ########.fr       */
+/*   Created: 2023/07/10 01:44:42 by tkuramot          #+#    #+#             */
+/*   Updated: 2023/07/17 08:56:35 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "deque.h"
+#include "stack.h"
 
-long long	deque_get_at(t_deque *deque, long long idx)
+void	stack_push(t_stacks *stacks, char sta)
 {
-	if (deque_is_empty(deque))
-		return (-1);
-	if (deque->front + idx < deque->capacity)
-		return deque->buffer[deque->front + idx];
+	long long		sta_first;
+
+	if (sta == 'a')
+	{
+		if (deque_is_empty(&stacks->b))
+			return ;
+		sta_first = deque_pop_front(&stacks->b);
+		deque_push_front(&stacks->a, sta_first);
+	}
 	else
-		return deque->buffer[(deque->front + idx) % deque->capacity];
+	{
+		if (deque_is_empty(&stacks->a))
+			return ;
+		sta_first = deque_pop_front(&stacks->a);
+		deque_push_front(&stacks->b, sta_first);
+	}
 }

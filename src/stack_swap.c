@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_operations1.c                                :+:      :+:    :+:   */
+/*   stack_swap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 01:44:42 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 00:43:48 by tkuramot         ###   ########.fr       */
+/*   Created: 2023/07/17 08:56:18 by tkuramot          #+#    #+#             */
+/*   Updated: 2023/07/17 08:56:31 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "push_swap.h"
 
 void	stack_swap(t_stacks *stacks, char sta)
 {
@@ -43,50 +43,4 @@ void	stack_ss(t_stacks *stacks)
 {
 	stack_swap(stacks, 'a');
 	stack_swap(stacks, 'b');
-}
-
-void	stack_push(t_stacks *stacks, char sta)
-{
-	long long		sta_first;
-
-	if (sta == 'a')
-	{
-		if (deque_is_empty(&stacks->b))
-			return ;
-		sta_first = deque_pop_front(&stacks->b);
-		deque_push_front(&stacks->a, sta_first);
-	}
-	else
-	{
-		if (deque_is_empty(&stacks->a))
-			return ;
-		sta_first = deque_pop_front(&stacks->a);
-		deque_push_front(&stacks->b, sta_first);
-	}
-}
-
-void	stack_rotate(t_stacks *stacks, char sta)
-{
-	long long		sta_first;
-
-	if (sta == 'a')
-	{
-		if (deque_is_empty(&stacks->a))
-			return ;
-		sta_first = deque_pop_front(&stacks->a);
-		deque_push_back(&stacks->a, sta_first);
-	}
-	else
-	{
-		if (deque_is_empty(&stacks->b))
-			return ;
-		sta_first = deque_pop_front(&stacks->b);
-		deque_push_back(&stacks->b, sta_first);
-	}
-}
-
-void	stack_rr(t_stacks *stacks)
-{
-	stack_rotate(stacks, 'a');
-	stack_rotate(stacks, 'b');
 }

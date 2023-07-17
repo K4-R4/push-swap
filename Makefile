@@ -1,12 +1,23 @@
 NAME = push_swap
 SRCDIR = ./src/
 OBJDIR = $(SRCDIR)
-SRCS = main.c deque1.c deque2.c deque3.c \
-	stack_operations1.c stack_operations2.c \
-	parse_args.c validate_args.c sort.c
+SRCS = main.c \
+		parse_args.c \
+		validate_args.c \
+		deque_core.c \
+		deque_utils.c \
+		stack_swap.c \
+		stack_push.c \
+		stack_rotate.c \
+		sort.c \
+		sort_small.c
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
-TEST_SRCS = deque1.c deque2.c deque3.c stack_operations1.c \
-	stack_operations2.c
+
+TEST_SRCS = deque_core.c \
+		deque_utils.c \
+		stack_swap.c \
+		stack_push.c \
+		stack_rotate.c
 TEST_OBJS = $(addprefix $(OBJDIR), $(TEST_SRCS:.c=.o))
 
 CFLAGS = -Wall -Wextra -Werror
