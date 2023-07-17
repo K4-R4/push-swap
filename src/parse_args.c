@@ -6,10 +6,11 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 13:26:28 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:44:02 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "deque.h"
 #include "push_swap.h"
 
 static long long	get_arg_count(char **num_list)
@@ -22,7 +23,7 @@ static long long	get_arg_count(char **num_list)
 	return (cnt);
 }
 
-static void		compression_helper(t_stacks *stacks, int *buffer)
+static void		compression_helper(t_stacks *stacks)
 {
 	long long	fixed;
 	long long	idx;
@@ -35,7 +36,7 @@ static void		compression_helper(t_stacks *stacks, int *buffer)
 		cnt = 0;
 		while (idx < stacks->a.capacity)
 		{
-			if (buffer[idx] < buffer[fixed])
+			if (stacks->alpha[idx] < stacks->alpha[fixed])
 				cnt++;
 			idx++;
 		}
@@ -44,29 +45,32 @@ static void		compression_helper(t_stacks *stacks, int *buffer)
 	}
 }
 
-static bool		compression(t_stacks *stacks , char **num_list)
+static void		compression(t_stacks *stacks , char **num_list)
 {
-	int		*buffer;
 	size_t	idx;
 
-	buffer = (int *)ft_calloc(stacks->a.capacity, sizeof (int));
-	if (!buffer)
-		return (false);
 	idx = 0;
 	while (num_list[idx])
 	{
-		buffer[idx] = ft_atoi(num_list[idx]);
+		stacks->alpha[idx] = ft_atoi(num_list[idx]);
 		idx++;
 	}
-	compression_helper(stacks, buffer);
-	return (true);
+	compression_helper(stacks);
 }
 
 static bool		init_stacks(t_stacks *stacks, long long capacity)
 {
 	deque_init(&stacks->a, capacity);
+	if (!stacks->a.buffer)
+		return (false);
 	deque_init(&stacks->b, capacity);
-	if (!stacks->a.buffer || !stacks->b.buffer)
+	if (!stacks->b.buffer)
+		return (false);
+	stacks->alpha = (long long *)ft_calloc(stacks->a.sz, sizeof (long long));
+	if (!stacks->alpha)
+		return (false);
+	stacks->beta = (long long *)ft_calloc(stacks->a.sz, sizeof (long long));
+	if (!stacks->beta)
 		return (false);
 	return (true);
 }
@@ -84,7 +88,6 @@ bool	parse_arg(t_stacks *stacks, char *arg)
 		return (false);
 	if (!init_stacks(stacks, capacity))
 		return (false);
-	if (!compression(stacks, num_list))
-		return (false);
+	compression(stacks, num_list);
 	return (true);
 }
