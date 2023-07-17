@@ -6,66 +6,30 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 14:07:46 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:57:47 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 
-void	sort_5(t_stacks *stacks, char cur_sta)
+static void	sort_2_reverse(t_stacks *stacks, char cur_sta)
 {
-	char		another_sta;
-	long long	pivot;
-	long long	idx;
+	long long	sta[2];
 
-	another_sta = 'a' + (cur_sta == 'a');
-	pivot = stack_get_min(stacks, cur_sta, 5) + 1;
-	idx = 0;
-	while (idx < 5)
-	{
-		if (stack_get_at(stacks, cur_sta, 0) > pivot)
-			stack_rotate(stacks, cur_sta);
-		else
-			stack_push(stacks, another_sta);
-		idx++;
-	}
-	sort_3(stacks, cur_sta);
-	sort_2(stacks, another_sta);
-	idx = 0;
-	while (idx < 3)
-	{
-		stack_rrotate(stacks, another_sta);
-		stack_push(stacks, cur_sta);
-		idx++;
-	}
+	sta[0] = stack_get_at(stacks, cur_sta, 0);
+	sta[1] = stack_get_at(stacks, cur_sta, 1);
+	if (sta[0] < sta[1])
+		stack_swap(stacks, cur_sta);
 }
 
-void	sort_4(t_stacks *stacks, char cur_sta)
+void	sort_2(t_stacks *stacks, char cur_sta)
 {
-	char		another_sta;
-	long long	pivot;
-	long long	idx;
+	long long	sta[2];
 
-	another_sta = 'a' + (cur_sta == 'a');
-	pivot = stack_get_min(stacks, cur_sta, 4) + 1;
-	idx = 0;
-	while (idx < 4)
-	{
-		if (stack_get_at(stacks, cur_sta, 0) > pivot)
-			stack_rotate(stacks, cur_sta);
-		else
-			stack_push(stacks, another_sta);
-		idx++;
-	}
-	sort_2(stacks, cur_sta);
-	sort_2(stacks, another_sta);
-	idx = 0;
-	while (idx < 2)
-	{
-		stack_rrotate(stacks, another_sta);
-		stack_push(stacks, cur_sta);
-		idx++;
-	}
+	sta[0] = stack_get_at(stacks, cur_sta, 0);
+	sta[1] = stack_get_at(stacks, cur_sta, 1);
+	if (sta[0] > sta[1])
+		stack_swap(stacks, cur_sta);
 }
 
 void	sort_3(t_stacks *stacks, char cur_sta)
@@ -97,12 +61,50 @@ void	sort_3(t_stacks *stacks, char cur_sta)
 	}
 }
 
-void	sort_2(t_stacks *stacks, char cur_sta)
+void	sort_4(t_stacks *stacks, char cur_sta)
 {
-	long long	sta[2];
+	char		another_sta;
+	long long	pivot;
+	long long	idx;
 
-	sta[0] = stack_get_at(stacks, cur_sta, 0);
-	sta[1] = stack_get_at(stacks, cur_sta, 1);
-	if (sta[0] > sta[1])
-		stack_swap(stacks, cur_sta);
+	another_sta = 'a' + (cur_sta == 'a');
+	pivot = stack_get_min(stacks, cur_sta, 4) + 1;
+	idx = 0;
+	while (idx < 4)
+	{
+		if (stack_get_at(stacks, cur_sta, 0) > pivot)
+			stack_rotate(stacks, cur_sta);
+		else
+			stack_push(stacks, another_sta);
+		idx++;
+	}
+	sort_2(stacks, cur_sta);
+	sort_2_reverse(stacks, another_sta);
+	idx = 0;
+	while (idx++ < 2)
+		stack_push(stacks, cur_sta);
+}
+
+void	sort_5(t_stacks *stacks, char cur_sta)
+{
+	char		another_sta;
+	long long	pivot;
+	long long	idx;
+
+	another_sta = 'a' + (cur_sta == 'a');
+	pivot = stack_get_min(stacks, cur_sta, 5) + 1;
+	idx = 0;
+	while (idx < 5)
+	{
+		if (stack_get_at(stacks, cur_sta, 0) > pivot)
+			stack_rotate(stacks, cur_sta);
+		else
+			stack_push(stacks, another_sta);
+		idx++;
+	}
+	sort_3(stacks, cur_sta);
+	sort_2_reverse(stacks, another_sta);
+	idx = 0;
+	while (idx++ < 2)
+		stack_push(stacks, cur_sta);
 }
