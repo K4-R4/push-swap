@@ -6,18 +6,11 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 23:55:48 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:57:08 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
-
-static long long	my_abs(long long nbr)
-{
-	if (nbr < 0)
-		return nbr * -1;
-	return nbr;
-}
 
 // Positive ops refers to how many of rotateing is needed and
 // negative ops refers to that of reverse rotating
@@ -54,7 +47,6 @@ static void		simulate_all_ops(t_stacks *stacks)
 // tbs
 static void	get_ops(t_stacks *stacks, long long *a_ops, long long *b_ops)
 {
-	long long	ops;
 	long long	idx_b;
 	long long	min_idx_b;
 	long long	tmp;
@@ -65,8 +57,6 @@ static void	get_ops(t_stacks *stacks, long long *a_ops, long long *b_ops)
 	tmp = stack_get_at(stacks, 'b', idx_b);
 	while (idx_b < stacks->b.sz)
 	{
-		ops = my_abs(stacks->alpha[idx_b])
-			+ my_abs(stacks->beta[idx_b]);
 		if (tmp < stack_get_at(stacks, 'b', idx_b))
 		{
 			min_idx_b = idx_b;
