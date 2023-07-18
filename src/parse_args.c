@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 20:52:47 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:10:37 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void		compression(t_stacks *stacks , char **num_list)
 
 static bool		init_stacks(t_stacks *stacks, long long capacity)
 {
+	stacks->flag_print = true;
 	deque_init(&stacks->a, capacity);
 	if (!stacks->a.buffer)
 		return (false);

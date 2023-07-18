@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 22:03:18 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:06:07 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ static void		execute_ops(t_stacks *stacks, long long ops, char cur_sta)
 	}
 }
 
-#include "push_swap.h"
 void		push_a_back(t_stacks *stacks)
 {
 	long long	a_ops;
@@ -103,14 +102,6 @@ void		push_a_back(t_stacks *stacks)
 	while (stacks->b.sz)
 	{
 		get_ops(stacks, &a_ops, &b_ops);
-
-		printf("|||||||||||||||||||||||||||||||||| sz %lld\n", stacks->b.sz);
-		printf("a_ops: %lld, b_ops: %lld\n", a_ops, b_ops);
-		printf("---------------------STACK A P\n");
-		deque_print_all(&stacks->a);
-		printf("---------------------STACK B P\n");
-		deque_print_all(&stacks->b);
-
 		execute_ops(stacks, a_ops, 'a');
 		execute_ops(stacks, b_ops, 'b');
 		stack_push(stacks, 'a');

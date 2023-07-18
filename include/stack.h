@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 22:15:33 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 15:42:54 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:10:15 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct s_stacks
 {
+	bool	flag_print;
 	t_deque a;
 	t_deque b;
 	long long	*alpha;
