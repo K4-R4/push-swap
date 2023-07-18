@@ -12,7 +12,8 @@ SRCS = main.c \
 		stack_utils.c \
 		sort.c \
 		sort_few_elements.c \
-		sort_many_elements.c
+		sort_many_elements.c \
+		manage_ops.c
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
 TEST_SRCS = deque_core.c \

@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 15:41:18 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:57:09 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,6 @@ static void	prepare_sort(t_stacks *stacks)
 	while (stacks->a.sz > 5)
 		stack_push(stacks, 'b');
 	sort(stacks);
-}
-
-// Get the minimum operation to push one of stack B elements to stack A
-static void		get_ops(t_stacks *stacks, long long *a_ops, long long *b_ops)
-{
-	(void)stacks;
-}
-
-static void		push_a_back(t_stacks *stacks)
-{
-	long long	a_ops;
-	long long	b_ops;
-
-	while (stacks->b.sz)
-	{
-		get_ops(stacks, &a_ops, &b_ops);
-	}
 }
 
 void	sort_many(t_stacks *stacks)
