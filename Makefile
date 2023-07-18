@@ -13,7 +13,8 @@ SRCS = main.c \
 		sort.c \
 		sort_few_elements.c \
 		sort_many_elements.c \
-		manage_ops.c
+		manage_ops.c \
+		debug.c
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
 TEST_SRCS = deque_core.c \
@@ -34,7 +35,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(INCLUDE)
+	# $(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(INCLUDE)
+	gcc -fsanitize=address $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(INCLUDE)
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@

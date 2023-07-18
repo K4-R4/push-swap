@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 16:57:49 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:03:18 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ static void		simulate_all_ops(t_stacks *stacks)
 		if (idx_b < stacks->b.sz / 2)
 			ops = idx_b;
 		else
-			ops = -(stacks->b.sz - idx_b + 1);
-		stacks->beta[ele] = ops;
+			ops = -(stacks->b.sz - idx_b);
+		stacks->beta[idx_b] = ops;
 		idx_a = 0;
 		ops = 0;
 		ele = stack_get_at(stacks, 'b', idx_b);
-		while (stack_get_at(stacks, 'a', idx_a++) > ele)
+		while (idx_a < stacks->a.sz && stack_get_at(stacks, 'a', idx_a) < ele)
+		{
 			ops++;
-		if (idx_a < stacks->a.sz / 2)
-			ops = idx_a;
-		else
-			ops = -(stacks->a.sz - ops + 1);
-		stacks->alpha[ele] = ops;
+			idx_a++;
+		}
+		stacks->alpha[idx_b] = ops;
+		idx_b++;
 	}
 }
 
@@ -62,10 +62,10 @@ static void	get_ops(t_stacks *stacks, long long *a_ops, long long *b_ops)
 	min_ops = LLONG_MAX;
 	min_idx_b = 0;
 	idx_b = 0;
-	while (idx_b < stacks->a.sz)
+	while (idx_b < stacks->b.sz)
 	{
-		ops = my_abs(stacks->alpha[stack_get_at(stacks, 'b', idx_b)])
-			+ my_abs(stacks->beta[stack_get_at(stacks, 'b', idx_b)]);
+		ops = my_abs(stacks->alpha[idx_b])
+			+ my_abs(stacks->beta[idx_b]);
 		if (ops < min_ops)
 		{
 			min_ops = ops;
@@ -94,6 +94,7 @@ static void		execute_ops(t_stacks *stacks, long long ops, char cur_sta)
 	}
 }
 
+#include "push_swap.h"
 void		push_a_back(t_stacks *stacks)
 {
 	long long	a_ops;
@@ -102,6 +103,14 @@ void		push_a_back(t_stacks *stacks)
 	while (stacks->b.sz)
 	{
 		get_ops(stacks, &a_ops, &b_ops);
+
+		printf("|||||||||||||||||||||||||||||||||| sz %lld\n", stacks->b.sz);
+		printf("a_ops: %lld, b_ops: %lld\n", a_ops, b_ops);
+		printf("---------------------STACK A P\n");
+		deque_print_all(&stacks->a);
+		printf("---------------------STACK B P\n");
+		deque_print_all(&stacks->b);
+
 		execute_ops(stacks, a_ops, 'a');
 		execute_ops(stacks, b_ops, 'b');
 		stack_push(stacks, 'a');

@@ -6,21 +6,11 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 23:35:34 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 12:44:38 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:47:47 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-
-void	deque_print_all(t_deque *deque)
-{
-	printf("========================\n");
-	for(int i = 0; i < deque->sz; i++)
-	{
-		printf("ele: %lld\n", deque_get_at(deque, i));
-	}
-}
 
 int	main(int argc, char **argv)
 {

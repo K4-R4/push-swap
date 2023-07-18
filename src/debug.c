@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 22:05:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 21:01:57 by tkuramot         ###   ########.fr       */
+/*   Created: 2023/07/18 20:47:27 by tkuramot          #+#    #+#             */
+/*   Updated: 2023/07/18 20:47:54 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort(t_stacks *stacks)
+void	deque_print_all(t_deque *deque)
 {
-	long long	sz;
-
-	sz = stacks->a.sz;
-	if (sz == 2)
-		sort_2(stacks, 'a');
-	else if (sz == 3)
-		sort_3(stacks, 'a');
-	else if (sz == 4)
-		sort_4(stacks, 'a');
-	else if (sz == 5)
-		sort_5(stacks, 'a');
-	else
-		sort_many(stacks);
+	printf("========================\n");
+	for(int i = 0; i < deque->sz; i++)
+	{
+		printf("ele: %lld\n", deque_get_at(deque, i));
+	}
 }

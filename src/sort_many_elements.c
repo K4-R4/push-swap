@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 16:57:09 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:35:19 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		push_b_range(t_stacks *stacks, long long s, long long e)
 	long long	n_to_push;
 	long long	sta_first;
 
-	n_to_push = e - s;
+	n_to_push = e - s + 1;
 	while (n_to_push)
 	{
 		sta_first = stack_get_at(stacks, 'a', 0);
@@ -48,6 +48,7 @@ static void	prepare_sort(t_stacks *stacks)
 	sort(stacks);
 }
 
+#include "push_swap.h"
 void	sort_many(t_stacks *stacks)
 {
 	prepare_sort(stacks);

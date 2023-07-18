@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 15:44:02 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:52:47 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ static bool		init_stacks(t_stacks *stacks, long long capacity)
 	deque_init(&stacks->b, capacity);
 	if (!stacks->b.buffer)
 		return (false);
-	stacks->alpha = (long long *)ft_calloc(stacks->a.sz, sizeof (long long));
+	stacks->alpha = (long long *)ft_calloc(capacity, sizeof (long long));
 	if (!stacks->alpha)
 		return (false);
-	stacks->beta = (long long *)ft_calloc(stacks->a.sz, sizeof (long long));
+	stacks->beta = (long long *)ft_calloc(capacity, sizeof (long long));
 	if (!stacks->beta)
 		return (false);
 	return (true);
