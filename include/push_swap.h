@@ -7,7 +7,7 @@
 #include "sort.h"
 
 bool	is_valid_arg(char **num_list);
-bool	parse_arg(t_stacks *stacks, char *arg);
+bool	parse_arg(t_stacks *stacks, int argc, char **argv);
 
 // For debug only
 #include "stdio.h"

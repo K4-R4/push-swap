@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 22:10:37 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:47:16 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,24 @@ static bool		init_stacks(t_stacks *stacks, long long capacity)
 	return (true);
 }
 
-bool	parse_arg(t_stacks *stacks, char *arg)
+bool	parse_arg(t_stacks *stacks, int argc, char **argv)
 {
 	char	**num_list;
 	long long	capacity;
 
-	num_list = ft_split(arg, ' ');
-	if (!num_list)
-		return (false);
+	if (argc == 2)
+	{
+		num_list = ft_split(argv[1], ' ');
+		if (!num_list)
+			return (false);
+	}
+	else
+	{
+		num_list = (char **)ft_calloc(argc, sizeof (char *));
+		if (!num_list)
+			return false;
+		ft_memcpy(num_list, &argv[1], sizeof (char *) * (argc - 1));
+	}
 	capacity = get_arg_count(num_list);
 	if (!is_valid_arg(num_list))
 		return (false);

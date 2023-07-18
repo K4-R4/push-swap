@@ -6,25 +6,31 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 22:06:19 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:08:14 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 
 // Push (e - s) elements in the closed section from stack A to stack B
-static void		push_b_range(t_stacks *stacks, long long s, long long e)
+static void		push_b_range(t_stacks *stacks, long long pivot_small, long long pivot_large)
 {
 	long long	n_to_push;
 	long long	sta_first;
 
-	n_to_push = e - s + 1;
+	n_to_push = pivot_large;
 	while (n_to_push)
 	{
 		sta_first = stack_get_at(stacks, 'a', 0);
-		if (s <= sta_first && sta_first <= e)
+		if (0 <= sta_first && sta_first <= pivot_large - 1)
 		{
-			stack_push(stacks, 'b');
+			if (0 <= sta_first && sta_first <= pivot_small - 1)
+			{
+				stack_push(stacks, 'b');
+				stack_rotate(stacks, 'b');
+			}
+			else
+				stack_push(stacks, 'b');
 			n_to_push--;
 		}
 		else
@@ -41,8 +47,7 @@ static void	prepare_sort(t_stacks *stacks)
 
 	pivot_small = stacks->a.capacity / 3;
 	pivot_large = stacks->a.capacity - pivot_small;
-	push_b_range(stacks, 0, pivot_small - 1);
-	push_b_range(stacks, pivot_small, pivot_large - 1);
+	push_b_range(stacks, pivot_small, pivot_large);
 	while (stacks->a.sz > 5)
 		stack_push(stacks, 'b');
 	sort(stacks);
