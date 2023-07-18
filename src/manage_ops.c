@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 22:06:07 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:55:48 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,26 @@ static void		simulate_all_ops(t_stacks *stacks)
 }
 
 // Get the minimum operation to push one of stack B elements to stack A
+// tbs
 static void	get_ops(t_stacks *stacks, long long *a_ops, long long *b_ops)
 {
 	long long	ops;
-	long long	min_ops;
 	long long	idx_b;
 	long long	min_idx_b;
+	long long	tmp;
 
 	simulate_all_ops(stacks);
-	min_ops = LLONG_MAX;
 	min_idx_b = 0;
 	idx_b = 0;
+	tmp = stack_get_at(stacks, 'b', idx_b);
 	while (idx_b < stacks->b.sz)
 	{
 		ops = my_abs(stacks->alpha[idx_b])
 			+ my_abs(stacks->beta[idx_b]);
-		if (ops < min_ops)
+		if (tmp < stack_get_at(stacks, 'b', idx_b))
 		{
-			min_ops = ops;
 			min_idx_b = idx_b;
+			tmp = stack_get_at(stacks, 'b', idx_b);
 		}
 		idx_b++;
 	}

@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 23:08:14 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:53:49 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,19 @@ static void	prepare_sort(t_stacks *stacks)
 {
 	long long	pivot_small;
 	long long	pivot_large;
+	long long	ele;
 
 	pivot_small = stacks->a.capacity / 3;
 	pivot_large = stacks->a.capacity - pivot_small;
 	push_b_range(stacks, pivot_small, pivot_large);
 	while (stacks->a.sz > 5)
-		stack_push(stacks, 'b');
+	{
+		ele = stack_get_at(stacks, 'a', 0);
+		if (ele < stacks->a.capacity - 5)
+			stack_push(stacks, 'b');
+		else
+			stack_rotate(stacks, 'a');
+	}
 	sort(stacks);
 }
 
