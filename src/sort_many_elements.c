@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/19 10:02:42 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:18:48 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ static void	prepare_sort(t_stacks *stacks)
 void	sort_many(t_stacks *stacks)
 {
 	prepare_sort(stacks);
-	push_a_back(stacks);
+	execute_ops(stacks);
 }
