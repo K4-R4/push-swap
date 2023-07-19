@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/19 20:18:33 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/19 20:50:54 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,16 @@ static long long	my_abs(long long nbr)
 	return (nbr);
 }
 
-#include "push_swap.h"
+/*
+static long long	my_min(long long a, long long b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+*/
+
 void		execute_ops(t_stacks *stacks)
 {
 	long long	idx_b;
@@ -102,13 +111,6 @@ void		execute_ops(t_stacks *stacks)
 
 	while (stacks->b.sz)
 	{
-		/*
-		ft_printf("STACK A ====\n");
-		deque_print_all(&stacks->a);
-		ft_printf("STACK B ====\n");
-		deque_print_all(&stacks->b);
-		*/
-
 		idx_b = 0;
 		min_ops = LLONG_MAX;
 		simulate_ops(stacks);
@@ -123,11 +125,14 @@ void		execute_ops(t_stacks *stacks)
 			idx_b++;
 		}
 		/*
-		ft_printf("SIMULATION ====\n");
-		for(int i = 0; i < stacks->b.sz; i++)
+		if (stacks->beta[min_idx_b] < 0)
 		{
-			printf("stack B %d: %lld %lld\n", i, stacks->alpha[i], stacks->beta[i]);
+			ops = my_min(stacks->alpha[min_idx_b], my_abs(stacks->beta[min_idx_b]));
+			stacks->alpha[min_idx_b] -= ops;
+			stacks->beta[min_idx_b] -= ops;
 		}
+		while (ops--)
+			stack_rr(stacks);
 		*/
 		rotate_b_til_target(stacks, min_idx_b);
 		push_a_back(stacks);
