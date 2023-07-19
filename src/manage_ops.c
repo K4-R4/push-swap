@@ -6,107 +6,68 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/18 23:57:08 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:18:31 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 
-// Positive ops refers to how many of rotateing is needed and
-// negative ops refers to that of reverse rotating
-// Negative ops needs extra one op to push it to another stack
-static void		simulate_all_ops(t_stacks *stacks)
-{
-	long long	idx_b;
-	long long	idx_a;
-	long long	ele;
-	long long	ops;
-
-	idx_b = 0;
-	while (idx_b < stacks->b.sz)
-	{
-		if (idx_b < stacks->b.sz / 2)
-			ops = idx_b;
-		else
-			ops = -(stacks->b.sz - idx_b);
-		stacks->beta[idx_b] = ops;
-		idx_a = 0;
-		ops = 0;
-		ele = stack_get_at(stacks, 'b', idx_b);
-		while (idx_a < stacks->a.sz && stack_get_at(stacks, 'a', idx_a) < ele)
-		{
-			ops++;
-			idx_a++;
-		}
-		stacks->alpha[idx_b] = ops;
-		idx_b++;
-	}
-}
-
-// Get the minimum operation to push one of stack B elements to stack A
-// tbs
-static void	get_ops(t_stacks *stacks, long long *a_ops, long long *b_ops)
-{
-	long long	idx_b;
-	long long	min_idx_b;
-	long long	tmp;
-
-	simulate_all_ops(stacks);
-	min_idx_b = 0;
-	idx_b = 0;
-	tmp = stack_get_at(stacks, 'b', idx_b);
-	while (idx_b < stacks->b.sz)
-	{
-		if (tmp < stack_get_at(stacks, 'b', idx_b))
-		{
-			min_idx_b = idx_b;
-			tmp = stack_get_at(stacks, 'b', idx_b);
-		}
-		idx_b++;
-	}
-	*a_ops = stacks->alpha[min_idx_b];
-	*b_ops = stacks->beta[min_idx_b];
-}
-
-static void		execute_ops(t_stacks *stacks, long long ops, char cur_sta)
-{
-	while (ops)
-	{
-		if (ops > 0)
-		{
-			stack_rotate(stacks, cur_sta);
-			ops--;
-		}
-		if (ops < 0)
-		{
-			stack_rrotate(stacks, cur_sta);
-			ops++;
-		}
-	}
-}
-
+#include "push_swap.h"
 void		push_a_back(t_stacks *stacks)
 {
-	long long	a_ops;
-	long long	b_ops;
+	long long	cnt;
+	long long	b_front;
+	long long	a_front;
+	long long	a_back;
 
 	while (stacks->b.sz)
 	{
-		get_ops(stacks, &a_ops, &b_ops);
-		execute_ops(stacks, a_ops, 'a');
-		execute_ops(stacks, b_ops, 'b');
-		stack_push(stacks, 'a');
-		while (a_ops)
+		cnt = 0;
+		b_front = stack_get_at(stacks, 'b', 0);
+		a_front = stack_get_at(stacks, 'a', 0);
+		a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
+
+		/*
+		ft_printf("PASSED\n");
+		ft_printf("%d\n", b_front);
+		ft_printf("%d\n", a_front);
+		printf("===========BEFORE\n");
+		printf("STACK A\n");
+		deque_print_all(&stacks->a);
+		printf("STACK B\n");
+		deque_print_all(&stacks->b);
+		*/
+
+		if (b_front == a_front - 1)
 		{
-			if (a_ops > 0)
+			stack_push(stacks, 'a');
+			a_front = stack_get_at(stacks, 'a', 0);
+			a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
+			while (a_front - 1 == a_back)
 			{
 				stack_rrotate(stacks, 'a');
-				a_ops--;
+				a_front = stack_get_at(stacks, 'a', 0);
+				a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
 			}
-			if (a_ops < 0)
+		}
+		else if (b_front >= a_back)
+		{
+			stack_push(stacks, 'a');
+			stack_rotate(stacks, 'a');
+		}
+		else if (b_front < a_back)
+		{
+			while (b_front < a_back && a_back != stacks->a.capacity - 1)
+			{
+				stack_rrotate(stacks, 'a');
+				a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
+				cnt++;
+			}
+			stack_push(stacks, 'a');
+			while (cnt + 1)
 			{
 				stack_rotate(stacks, 'a');
-				a_ops++;
+				cnt--;
 			}
 		}
 	}
