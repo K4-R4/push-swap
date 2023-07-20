@@ -6,101 +6,43 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/19 20:50:54 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:27:57 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sort.h"
+#include "push_swap.h"
 
-// Rotate or reverse rotate stack B til its top has the the least-ops-ele
-static void		rotate_b_til_target(t_stacks *stacks, long long min_idx_b)
+static void		execute_op(t_stacks *stacks, char cur_sta, long long op)
 {
-	if (stacks->beta[min_idx_b] > 0)
-	{
-		while (stacks->beta[min_idx_b])
-		{
-			stack_rotate(stacks, 'b');
-			stacks->beta[min_idx_b]--;
-		}
-	}
+	// printf("OPS: %c, %lld\n", cur_sta, op);
+	if (op > 0)
+		while (op--)
+			stack_rotate(stacks, cur_sta);
 	else
-	{
-		while (stacks->beta[min_idx_b])
-		{
-			stack_rrotate(stacks, 'b');
-			stacks->beta[min_idx_b]++;
-		}
-	}
+		while (op++)
+			stack_rrotate(stacks, cur_sta);
 }
 
-static void	push_a_back_helper(t_stacks *stacks, long long b_front, long long a_back)
+static void		compress_ops(t_stacks *stacks, long long idx)
 {
-	long long	cnt;
+	long long	a_ops;
+	long long	b_ops;
+	long long	common_ops;
 
-	cnt = 0;
-	if (b_front >= a_back)
-	{
-		stack_push(stacks, 'a');
-		stack_rotate(stacks, 'a');
-	}
-	else if (b_front < a_back)
-	{
-		while (b_front < a_back && a_back != stacks->a.capacity - 1)
-		{
-			stack_rrotate(stacks, 'a');
-			a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
-			cnt++;
-		}
-		stack_push(stacks, 'a');
-		while (cnt + 1)
-		{
-			stack_rotate(stacks, 'a');
-			cnt--;
-		}
-	}
-}
-
-static void		push_a_back(t_stacks *stacks)
-{
-	long long	b_front;
-	long long	a_front;
-	long long	a_back;
-
-	b_front = stack_get_at(stacks, 'b', 0);
-	a_front = stack_get_at(stacks, 'a', 0);
-	a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
-	if (b_front == a_front - 1)
-	{
-		stack_push(stacks, 'a');
-		a_front = stack_get_at(stacks, 'a', 0);
-		a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
-		while (a_front - 1 == a_back)
-		{
-			stack_rrotate(stacks, 'a');
-			a_front = stack_get_at(stacks, 'a', 0);
-			a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
-		}
-	}
+	a_ops = stacks->alpha[idx];
+	b_ops = stacks->beta[idx];
+	if (a_ops * b_ops < 0)
+		return ;
+	common_ops = my_min(my_abs(a_ops), my_abs(b_ops));
+	stacks->alpha[idx] -= common_ops;
+	stacks->beta[idx] -= common_ops;
+	if (stacks->alpha[idx] > 0)
+		while (common_ops--)
+			stack_rr(stacks);
 	else
-		push_a_back_helper(stacks, b_front, a_back);
+		while (common_ops--)
+			stack_rrr(stacks);
 }
-
-static long long	my_abs(long long nbr)
-{
-	if (nbr < 0)
-		return (nbr * -1);
-	return (nbr);
-}
-
-/*
-static long long	my_min(long long a, long long b)
-{
-	if (a < b)
-		return (a);
-	else
-		return (b);
-}
-*/
 
 void		execute_ops(t_stacks *stacks)
 {
@@ -116,7 +58,7 @@ void		execute_ops(t_stacks *stacks)
 		simulate_ops(stacks);
 		while (idx_b < stacks->b.sz)
 		{
-			ops = stacks->alpha[idx_b] + my_abs(stacks->beta[idx_b]);
+			ops = my_abs(stacks->alpha[idx_b]) + my_abs(stacks->beta[idx_b]);
 			if (ops < min_ops)
 			{
 				min_idx_b = idx_b;
@@ -125,16 +67,14 @@ void		execute_ops(t_stacks *stacks)
 			idx_b++;
 		}
 		/*
-		if (stacks->beta[min_idx_b] < 0)
-		{
-			ops = my_min(stacks->alpha[min_idx_b], my_abs(stacks->beta[min_idx_b]));
-			stacks->alpha[min_idx_b] -= ops;
-			stacks->beta[min_idx_b] -= ops;
-		}
-		while (ops--)
-			stack_rr(stacks);
+		printf("STACK A =======\n");
+		deque_print_all(&stacks->a);
+		printf("STACK B =======\n");
+		deque_print_all(&stacks->b);
 		*/
-		rotate_b_til_target(stacks, min_idx_b);
-		push_a_back(stacks);
+		compress_ops(stacks, min_idx_b);
+		execute_op(stacks, 'a', stacks->alpha[min_idx_b]);
+		execute_op(stacks, 'b', stacks->beta[min_idx_b]);
+		stack_push(stacks, 'a');
 	}
 }

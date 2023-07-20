@@ -6,39 +6,44 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:28:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/19 20:04:08 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:22:18 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sort.h"
+#include "push_swap.h"
 
-// Get how many operations are needed given a stack B front
+static long long	simulate_a_ops_helper(t_stacks *stacks,
+			long long a_front, long long a_back, long long b_front)
+{
+	long long	prev;
+	long long	idx_a;
+
+	prev = a_front;
+	idx_a = 1;
+	while (idx_a < stacks->a.sz)
+	{
+	}
+}
+
 static long long		simulate_a_ops(t_stacks *stacks, long long b_front)
 {
-	long long	idx_a;
+	long long	cnt;
+	long long	ops;
 	long long	a_front;
 	long long	a_back;
-	long long	cnt;
 
 	a_front = stack_get_at(stacks, 'a', 0);
 	a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
-	if (b_front == a_front - 1)
+	if (b_front - 1 == a_front
+		|| (b_front < a_front && a_back == stacks->a.capacity - 1))
 		return (0);
-	else if (b_front >= a_back)
-		return (1);
-	else if (b_front < a_back && a_back != stacks->a.capacity - 1)
-	{
-		idx_a = stacks->a.sz - 1;
-		cnt = 0;
-		while (b_front < a_back && a_back != stacks->a.capacity - 1)
-		{
-			a_back = stack_get_at(stacks, 'a', --idx_a);
-			cnt++;
-		}
-		return (cnt * 2 + 1);
-	}
-	else
-		return (1);
+	ops = simulate_a_ops_helper(stacks, a_front, a_back, b_front);
+	/*
+	printf("PASSED ops %lld\n", ops);
+	printf("cnt %lld\n", cnt);
+	printf("sz %lld\n", stacks->a.sz);
+	*/
+	return (ops);
 }
 
 static void	simulate_b_ops(t_stacks *stacks)

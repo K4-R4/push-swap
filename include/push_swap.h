@@ -8,6 +8,8 @@
 
 bool	is_valid_arg(char **num_list);
 bool	parse_arg(t_stacks *stacks, int argc, char **argv);
+long long	my_abs(long long nbr);
+long long	my_min(long long a, long long b);
 
 // For debug only
 #include "stdio.h"

@@ -15,6 +15,7 @@ SRCS = main.c \
 		sort_many_elements.c \
 		simulate_ops.c \
 		manage_ops.c \
+		push_swap_utils.c \
 		debug.c
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
