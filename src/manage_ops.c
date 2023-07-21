@@ -6,11 +6,19 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/20 10:27:57 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:48:01 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static long long	convert_idx_to_ops(long long idx, char sta_sz)
+{
+	if (idx <= sta_sz / 2)
+		return (idx);
+	else
+		return (sta_sz - idx);
+}
 
 static void		execute_op(t_stacks *stacks, char cur_sta, long long op)
 {
@@ -58,6 +66,7 @@ void		execute_ops(t_stacks *stacks)
 		simulate_ops(stacks);
 		while (idx_b < stacks->b.sz)
 		{
+			// printf("alpha: %lld, beta: %lld\n", stacks->alpha[idx_b], stacks->beta[idx_b]);
 			ops = my_abs(stacks->alpha[idx_b]) + my_abs(stacks->beta[idx_b]);
 			if (ops < min_ops)
 			{
@@ -66,15 +75,13 @@ void		execute_ops(t_stacks *stacks)
 			}
 			idx_b++;
 		}
-		/*
 		printf("STACK A =======\n");
 		deque_print_all(&stacks->a);
 		printf("STACK B =======\n");
 		deque_print_all(&stacks->b);
-		*/
 		compress_ops(stacks, min_idx_b);
-		execute_op(stacks, 'a', stacks->alpha[min_idx_b]);
-		execute_op(stacks, 'b', stacks->beta[min_idx_b]);
+		execute_op(stacks, 'a', convert_idx_to_ops(stacks->alpha[min_idx_b], stacks->a.sz));
+		execute_op(stacks, 'b', convert_idx_to_ops(stacks->beta[min_idx_b], stacks->b.sz));
 		stack_push(stacks, 'a');
 	}
 }

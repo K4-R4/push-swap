@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 14:57:47 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:21:35 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	sort_4(t_stacks *stacks, char cur_sta)
 	long long	idx;
 
 	another_sta = 'a' + (cur_sta == 'a');
-	pivot = stack_get_min(stacks, cur_sta, 4) + 1;
+	pivot = stack_get_min_value(stacks, cur_sta, 4) + 1;
 	idx = 0;
 	while (idx < 4)
 	{
@@ -92,7 +92,7 @@ void	sort_5(t_stacks *stacks, char cur_sta)
 	long long	idx;
 
 	another_sta = 'a' + (cur_sta == 'a');
-	pivot = stack_get_min(stacks, cur_sta, 5) + 1;
+	pivot = stack_get_min_value(stacks, cur_sta, 5) + 1;
 	idx = 0;
 	while (idx < 5)
 	{
