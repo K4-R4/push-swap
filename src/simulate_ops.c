@@ -6,36 +6,36 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:28:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/21 17:02:59 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:43:40 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void		simulate_a_ops(t_stacks *stacks, long long idx_b)
+static void		simulate_ops_helper(t_stacks *stacks, long long idx_b, long long b_front)
 {
 	long long	ops;
-	long long	b_front;
 	long long	idx_a;
-	long long	prev;
+	long long	idx_target;
+	long long	nex;
 
-	b_front = stack_get_at(stacks, 'b', idx_b);
-	prev = stack_get_at(stacks, 'a', idx_a);
-	while (prev < b_front)
-		idx_a++;
-	if (idx_a < stacks->a.sz / 2)
-		ops = idx_a;
+	idx_a = 1;
+	idx_target = 0;
+	nex = stack_get_at(stacks, 'a', idx_a);
+	while (idx_a < stacks->a.sz)
+	{
+		if (b_front < nex)
+			idx_target = idx_a;
+		nex = stack_get_at(stacks, 'a', ++idx_a);
+	}
+	if (idx_target < stacks->a.sz / 2)
+		ops = idx_target;
 	else
-		ops = idx_a - stacks->a.sz;
+		ops = idx_target - stacks->a.sz;
 	stacks->alpha[idx_b] = ops;
-	/*
-	printf("PASSED ops %lld\n", ops);
-	printf("cnt %lld\n", cnt);
-	printf("sz %lld\n", stacks->a.sz);
-	*/
 }
 
-static void	simulate_b_ops(t_stacks *stacks)
+void	simulate_ops(t_stacks *stacks)
 {
 	long long	idx_b;
 	long long	ops;
@@ -48,19 +48,7 @@ static void	simulate_b_ops(t_stacks *stacks)
 		else
 			ops = idx_b - stacks->b.sz;
 		stacks->beta[idx_b] = ops;
-		idx_b++;
-	}
-}
-
-void	simulate_ops(t_stacks *stacks)
-{
-	long long idx_b;
-
-	simulate_b_ops(stacks);
-	idx_b = 0;
-	while (idx_b < stacks->b.sz)
-	{
-		simulate_a_ops(stacks, idx_b);
+		simulate_ops_helper(stacks, idx_b, stack_get_at(stacks, 'b', idx_b));
 		idx_b++;
 	}
 }
