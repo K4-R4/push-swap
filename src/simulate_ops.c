@@ -6,44 +6,33 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:28:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/20 17:22:18 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:02:59 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static long long	simulate_a_ops_helper(t_stacks *stacks,
-			long long a_front, long long a_back, long long b_front)
+static void		simulate_a_ops(t_stacks *stacks, long long idx_b)
 {
-	long long	prev;
-	long long	idx_a;
-
-	prev = a_front;
-	idx_a = 1;
-	while (idx_a < stacks->a.sz)
-	{
-	}
-}
-
-static long long		simulate_a_ops(t_stacks *stacks, long long b_front)
-{
-	long long	cnt;
 	long long	ops;
-	long long	a_front;
-	long long	a_back;
+	long long	b_front;
+	long long	idx_a;
+	long long	prev;
 
-	a_front = stack_get_at(stacks, 'a', 0);
-	a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
-	if (b_front - 1 == a_front
-		|| (b_front < a_front && a_back == stacks->a.capacity - 1))
-		return (0);
-	ops = simulate_a_ops_helper(stacks, a_front, a_back, b_front);
+	b_front = stack_get_at(stacks, 'b', idx_b);
+	prev = stack_get_at(stacks, 'a', idx_a);
+	while (prev < b_front)
+		idx_a++;
+	if (idx_a < stacks->a.sz / 2)
+		ops = idx_a;
+	else
+		ops = idx_a - stacks->a.sz;
+	stacks->alpha[idx_b] = ops;
 	/*
 	printf("PASSED ops %lld\n", ops);
 	printf("cnt %lld\n", cnt);
 	printf("sz %lld\n", stacks->a.sz);
 	*/
-	return (ops);
 }
 
 static void	simulate_b_ops(t_stacks *stacks)
@@ -57,7 +46,7 @@ static void	simulate_b_ops(t_stacks *stacks)
 		if (idx_b <= stacks->b.sz / 2)
 			ops = idx_b;
 		else
-			ops = -(stacks->b.sz - idx_b);
+			ops = idx_b - stacks->b.sz;
 		stacks->beta[idx_b] = ops;
 		idx_b++;
 	}
@@ -71,7 +60,7 @@ void	simulate_ops(t_stacks *stacks)
 	idx_b = 0;
 	while (idx_b < stacks->b.sz)
 	{
-		stacks->alpha[idx_b] = simulate_a_ops(stacks, stack_get_at(stacks, 'b', idx_b));
+		simulate_a_ops(stacks, idx_b);
 		idx_b++;
 	}
 }
