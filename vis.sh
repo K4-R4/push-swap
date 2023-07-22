@@ -1,8 +1,8 @@
 #!/bin/bash
-NBR_COUNT=30
+NBR_COUNT=10
 ##
 NBR=$(seq 1 $NBR_COUNT | sort -R | tr '\n' ' ' | rev | cut -c 2- | rev)
-#NBR="0 1 2 3 4 5 6 7 8 9"
+NBR="8 1 5 9 3 7 4 10 6 2"
 #NBR=$(seq 1 $NBR_COUNT | tr '\n' ' ' | rev | cut -c 2- | rev)
 CMD=$( ./push_swap $NBR)
 NBR_LINK=$( echo "$NBR" | tr ' ' ',' )

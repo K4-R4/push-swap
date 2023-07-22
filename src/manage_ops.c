@@ -6,18 +6,18 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 00:48:01 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 10:55:21 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static long long	convert_idx_to_ops(long long idx, char sta_sz)
+long long	convert_idx_to_ops(long long idx, char sta_sz)
 {
 	if (idx <= sta_sz / 2)
 		return (idx);
 	else
-		return (sta_sz - idx);
+		return (idx - sta_sz);
 }
 
 static void		execute_op(t_stacks *stacks, char cur_sta, long long op)
@@ -52,6 +52,21 @@ static void		compress_ops(t_stacks *stacks, long long idx)
 			stack_rrr(stacks);
 }
 
+static void		rotate_continuous(t_stacks *stacks)
+{
+	long long	a_front;
+	long long	a_back;
+
+	a_front = stack_get_at(stacks, 'a', 0);
+	a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
+	while (a_front == a_back + 1)
+	{
+		stack_rrotate(stacks, 'a');
+		a_front = stack_get_at(stacks, 'a', 0);
+		a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
+	}
+}
+
 void		execute_ops(t_stacks *stacks)
 {
 	long long	idx_b;
@@ -61,12 +76,13 @@ void		execute_ops(t_stacks *stacks)
 
 	while (stacks->b.sz)
 	{
+		printf("===============================\n");
 		idx_b = 0;
 		min_ops = LLONG_MAX;
 		simulate_ops(stacks);
 		while (idx_b < stacks->b.sz)
 		{
-			// printf("alpha: %lld, beta: %lld\n", stacks->alpha[idx_b], stacks->beta[idx_b]);
+			printf("alpha: %lld, beta: %lld\n", stacks->alpha[idx_b], stacks->beta[idx_b]);
 			ops = my_abs(stacks->alpha[idx_b]) + my_abs(stacks->beta[idx_b]);
 			if (ops < min_ops)
 			{
@@ -75,13 +91,18 @@ void		execute_ops(t_stacks *stacks)
 			}
 			idx_b++;
 		}
-		printf("STACK A =======\n");
+		printf("STACK A\n");
 		deque_print_all(&stacks->a);
-		printf("STACK B =======\n");
+		printf("STACK B\n");
 		deque_print_all(&stacks->b);
 		compress_ops(stacks, min_idx_b);
 		execute_op(stacks, 'a', convert_idx_to_ops(stacks->alpha[min_idx_b], stacks->a.sz));
 		execute_op(stacks, 'b', convert_idx_to_ops(stacks->beta[min_idx_b], stacks->b.sz));
 		stack_push(stacks, 'a');
 	}
+	rotate_continuous(stacks);
+	printf("STACK A\n");
+	deque_print_all(&stacks->a);
+	printf("STACK B\n");
+	deque_print_all(&stacks->b);
 }

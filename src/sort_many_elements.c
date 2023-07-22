@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/19 16:18:48 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 10:09:38 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	prepare_sort(t_stacks *stacks)
 	while (stacks->a.sz > 5)
 	{
 		ele = stack_get_at(stacks, 'a', 0);
-		if (ele < stacks->a.capacity - 5)
+		if (ele < stacks->a.capacity - 6)
 			stack_push(stacks, 'b');
 		else
 			stack_rotate(stacks, 'a');
