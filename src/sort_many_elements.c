@@ -6,11 +6,11 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 14:18:36 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:28:55 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sort.h"
+#include "push_swap.h"
 
 // Push (e - s) elements in the closed section from stack A to stack B
 static void		push_b_range(t_stacks *stacks, long long pivot_small, long long pivot_large)
@@ -52,7 +52,7 @@ static void	prepare_sort(t_stacks *stacks)
 	while (stacks->a.sz > 5)
 	{
 		ele = stack_get_at(stacks, 'a', 0);
-		if (ele < stacks->a.capacity - 6)
+		if (ele < stacks->a.capacity - 5)
 			stack_push(stacks, 'b');
 		else
 			stack_rotate(stacks, 'a');
@@ -60,7 +60,6 @@ static void	prepare_sort(t_stacks *stacks)
 	sort(stacks);
 }
 
-#include "push_swap.h"
 void	sort_many(t_stacks *stacks)
 {
 	prepare_sort(stacks);
