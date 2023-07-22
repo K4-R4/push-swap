@@ -6,13 +6,13 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 10:55:21 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:20:09 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long long	convert_idx_to_ops(long long idx, char sta_sz)
+long long	convert_idx_to_ops(long long idx, long long sta_sz)
 {
 	if (idx <= sta_sz / 2)
 		return (idx);
@@ -31,6 +31,7 @@ static void		execute_op(t_stacks *stacks, char cur_sta, long long op)
 			stack_rrotate(stacks, cur_sta);
 }
 
+/*
 static void		compress_ops(t_stacks *stacks, long long idx)
 {
 	long long	a_ops;
@@ -51,6 +52,7 @@ static void		compress_ops(t_stacks *stacks, long long idx)
 		while (common_ops--)
 			stack_rrr(stacks);
 }
+*/
 
 static void		rotate_continuous(t_stacks *stacks)
 {
@@ -76,13 +78,13 @@ void		execute_ops(t_stacks *stacks)
 
 	while (stacks->b.sz)
 	{
-		printf("===============================\n");
+		//printf("===============================\n");
 		idx_b = 0;
 		min_ops = LLONG_MAX;
 		simulate_ops(stacks);
 		while (idx_b < stacks->b.sz)
 		{
-			printf("alpha: %lld, beta: %lld\n", stacks->alpha[idx_b], stacks->beta[idx_b]);
+			//printf("alpha: %lld, beta: %lld\n", stacks->alpha[idx_b], stacks->beta[idx_b]);
 			ops = my_abs(stacks->alpha[idx_b]) + my_abs(stacks->beta[idx_b]);
 			if (ops < min_ops)
 			{
@@ -91,18 +93,23 @@ void		execute_ops(t_stacks *stacks)
 			}
 			idx_b++;
 		}
+		/*
 		printf("STACK A\n");
 		deque_print_all(&stacks->a);
 		printf("STACK B\n");
 		deque_print_all(&stacks->b);
-		compress_ops(stacks, min_idx_b);
+		*/
+		// compress_ops(stacks, min_idx_b);
 		execute_op(stacks, 'a', convert_idx_to_ops(stacks->alpha[min_idx_b], stacks->a.sz));
 		execute_op(stacks, 'b', convert_idx_to_ops(stacks->beta[min_idx_b], stacks->b.sz));
 		stack_push(stacks, 'a');
 	}
 	rotate_continuous(stacks);
+
+	/*
 	printf("STACK A\n");
 	deque_print_all(&stacks->a);
 	printf("STACK B\n");
 	deque_print_all(&stacks->b);
+	*/
 }

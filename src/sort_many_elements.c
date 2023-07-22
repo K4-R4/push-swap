@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 10:09:38 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:18:36 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,15 @@ static void	prepare_sort(t_stacks *stacks)
 	sort(stacks);
 }
 
+#include "push_swap.h"
 void	sort_many(t_stacks *stacks)
 {
 	prepare_sort(stacks);
 	execute_ops(stacks);
+	/*
+	printf("STACK A\n");
+	deque_print_all(&stacks->a);
+	printf("STACK B\n");
+	deque_print_all(&stacks->b);
+	*/
 }

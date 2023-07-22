@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:28:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 12:37:24 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:49:46 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,19 @@ static void		simulate_ops_helper(t_stacks *stacks, long long idx_b, long long b_
 		idx_a = 0;
 		prev = stack_get_at(stacks, 'a', idx_a);
 		nex = stack_get_at(stacks, 'a', idx_a + 1);
-		while (idx_a + 1 < stacks->a.sz - 1)
+		while (idx_a < stacks->a.sz - 1)
 		{
+			//printf("=========%lld, %lld: %lld - %lld\n", b_front, idx_a, prev, nex);
 			if (prev < b_front && b_front < nex)
+			{
+				//printf("PAAAAAAAAAAAASSED\n");
 				stacks->alpha[idx_b] = convert_idx_to_ops(idx_a + 1, stacks->a.sz);
+			}
 			idx_a++;
-			printf("=========%lld\n", b_front);
 			prev = stack_get_at(stacks, 'a', idx_a);
 			nex = stack_get_at(stacks, 'a', idx_a + 1);
 		}
-		printf("min~~~~~%lld\n", stack_get_min_value(stacks, 'a', stacks->a.sz));
-		printf("~~~~~%lld\n", stacks->alpha[idx_b]);
+		//printf("~~~~~%lld\n", stacks->alpha[idx_b]);
 	}
 }
 
