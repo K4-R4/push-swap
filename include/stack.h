@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 22:15:33 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 00:15:10 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:14:36 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_stacks
 	t_deque b;
 	long long	*alpha;
 	long long	*beta;
+	char		*instructions;
 }				t_stacks;
 
 void	stack_swap(t_stacks *stacks, char sta);

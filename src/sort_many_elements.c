@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 14:28:55 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:54:15 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,4 @@ void	sort_many(t_stacks *stacks)
 {
 	prepare_sort(stacks);
 	execute_ops(stacks);
-	/*
-	printf("STACK A\n");
-	deque_print_all(&stacks->a);
-	printf("STACK B\n");
-	deque_print_all(&stacks->b);
-	*/
 }

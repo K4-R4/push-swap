@@ -6,11 +6,24 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 09:49:47 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 00:37:54 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:23:40 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	stack_save_instruction(t_stacks *stacks, char *instruction)
+{
+	char	*instruction_dup;
+	char	*new_instructions;
+
+	instruction_dup = ft_strdup(instruction);
+	if (!instruction_dup)
+		my_exit(NULL, 1);
+	new_instructions = ft_strjoin(stacks->instructions, instruction_dup);
+	if (!new_instructions)
+		my_exit(NULL, 1);
+}
 
 long long	stack_get_at(t_stacks *stacks, char sta, long long idx)
 {
