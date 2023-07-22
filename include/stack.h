@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 22:15:33 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 16:14:36 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:59:05 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,20 @@ typedef struct s_stacks
 	char		*instructions;
 }				t_stacks;
 
-void	stack_swap(t_stacks *stacks, char sta);
+void	stack_sa(t_stacks *stacks);
+void	stack_sb(t_stacks *stacks);
 void	stack_ss(t_stacks *stacks);
-void	stack_push(t_stacks *stacks, char sta);
-void	stack_rotate(t_stacks *stacks, char sta);
+void	stack_pa(t_stacks *stacks);
+void	stack_pb(t_stacks *stacks);
+void	stack_ra(t_stacks *stacks);
+void	stack_rb(t_stacks *stacks);
 void	stack_rr(t_stacks *stacks);
-void	stack_rrotate(t_stacks *stacks, char sta);
+void	stack_rra(t_stacks *stacks);
+void	stack_rrb(t_stacks *stacks);
 void	stack_rrr(t_stacks *stacks);
-long long	stack_get_at(t_stacks *stacks, char sta, long long idx);
-long long	stack_get_min_value(t_stacks *stacks, char cur_sta, long long n);
-long long	stack_get_min_idx(t_stacks *stacks, char cur_sta, long long n);
+long long	stack_get_at(t_deque *deq, long long idx);
+long long	stack_get_min_value(t_deque *deq);
+long long	stack_get_min_idx(t_deque *deq);
+void	stack_save_instr(t_stacks *stacks, char *instruction);
 
 #endif

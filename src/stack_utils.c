@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 09:49:47 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 16:23:40 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:58:32 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,12 @@ void	stack_save_instruction(t_stacks *stacks, char *instruction)
 		my_exit(NULL, 1);
 }
 
-long long	stack_get_at(t_stacks *stacks, char sta, long long idx)
+long long	stack_get_at(t_deque *deq, long long idx)
 {
-	if (sta == 'a')
-		return deque_get_at(&stacks->a, idx);
-	else
-		return deque_get_at(&stacks->b, idx);
+	return deque_get_at(deq, idx);
 }
 
-long long	stack_get_min_value(t_stacks *stacks, char cur_sta, long long n)
+long long	stack_get_min_value(t_deque *deq)
 {
 	long long	idx;
 	long long	min_sta;
@@ -41,9 +38,9 @@ long long	stack_get_min_value(t_stacks *stacks, char cur_sta, long long n)
 
 	idx = 0;
 	min_sta = LLONG_MAX;
-	while (idx < n)
+	while (idx < deq->sz)
 	{
-		ele = stack_get_at(stacks, cur_sta, idx);
+		ele = stack_get_at(deq, idx);
 		if (ele < min_sta)
 			min_sta = ele;
 		idx++;
@@ -51,7 +48,7 @@ long long	stack_get_min_value(t_stacks *stacks, char cur_sta, long long n)
 	return (min_sta);
 }
 
-long long	stack_get_min_idx(t_stacks *stacks, char cur_sta, long long n)
+long long	stack_get_min_idx(t_deque *deq)
 {
 	long long	idx;
 	long long	min_idx;
@@ -60,9 +57,9 @@ long long	stack_get_min_idx(t_stacks *stacks, char cur_sta, long long n)
 
 	idx = 0;
 	min_sta = LLONG_MAX;
-	while (idx < n)
+	while (idx < deq->sz)
 	{
-		ele = stack_get_at(stacks, cur_sta, idx);
+		ele = stack_get_at(deq, idx);
 		if (ele < min_sta)
 		{
 			min_idx = idx;

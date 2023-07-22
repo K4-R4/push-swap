@@ -6,20 +6,20 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 00:21:35 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:07:52 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 
-static void	sort_2_reverse(t_stacks *stacks, char cur_sta)
+static void	sort_2_reverse(t_deque *deq, bool )
 {
 	long long	sta[2];
 
-	sta[0] = stack_get_at(stacks, cur_sta, 0);
-	sta[1] = stack_get_at(stacks, cur_sta, 1);
+	sta[0] = stack_get_at(deq, 0);
+	sta[1] = stack_get_at(deq, 1);
 	if (sta[0] < sta[1])
-		stack_swap(stacks, cur_sta);
+		stack_swap(deq);
 }
 
 void	sort_2(t_stacks *stacks, char cur_sta)

@@ -9,6 +9,7 @@ SRCS = main.c \
 		stack_swap.c \
 		stack_push.c \
 		stack_rotate.c \
+		stack_rrotate.c \
 		stack_utils.c \
 		sort.c \
 		sort_few_elements.c \
