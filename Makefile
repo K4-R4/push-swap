@@ -6,6 +6,7 @@ SRCS = main.c \
 		validate_args.c \
 		deque_core.c \
 		deque_utils.c \
+		deque_search.c \
 		stack_swap.c \
 		stack_push.c \
 		stack_rotate.c \

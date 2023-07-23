@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 22:15:33 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 16:59:05 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 20:47:54 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ void	stack_rr(t_stacks *stacks);
 void	stack_rra(t_stacks *stacks);
 void	stack_rrb(t_stacks *stacks);
 void	stack_rrr(t_stacks *stacks);
-long long	stack_get_at(t_deque *deq, long long idx);
-long long	stack_get_min_value(t_deque *deq);
-long long	stack_get_min_idx(t_deque *deq);
 void	stack_save_instr(t_stacks *stacks, char *instruction);
 
 #endif

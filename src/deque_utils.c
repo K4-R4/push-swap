@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 21:36:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 15:25:05 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 20:46:13 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ bool	deque_is_empty(t_deque *deque)
 {
 	return (deque->sz == 0);
 }
-
 
 void	deque_free_buffer(t_deque *deque)
 {

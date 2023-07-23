@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 15:54:15 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/22 20:44:37 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,23 @@ static void		push_b_range(t_stacks *stacks, long long pivot_small, long long piv
 	n_to_push = pivot_large;
 	while (n_to_push)
 	{
-		sta_first = stack_get_at(stacks, 'a', 0);
+		sta_first = deque_get_at(&stacks->a, 0);
 		if (0 <= sta_first && sta_first <= pivot_large - 1)
 		{
 			if (0 <= sta_first && sta_first <= pivot_small - 1)
 			{
-				stack_push(stacks, 'b');
-				stack_rotate(stacks, 'b');
+				stack_pb(stacks);
+				stack_rb(stacks);
 			}
 			else
-				stack_push(stacks, 'b');
+				stack_pb(stacks);
 			n_to_push--;
 		}
 		else
-			stack_rotate(stacks, 'a');
+			stack_ra(stacks);
 	}
 }
 
-// Push elements in stack A until its size reaches less than 5,
-// and then sort stack A
 static void	prepare_sort(t_stacks *stacks)
 {
 	long long	pivot_small;
@@ -51,11 +49,11 @@ static void	prepare_sort(t_stacks *stacks)
 	push_b_range(stacks, pivot_small, pivot_large);
 	while (stacks->a.sz > 5)
 	{
-		ele = stack_get_at(stacks, 'a', 0);
+		ele = deque_get_at(&stacks->a, 0);
 		if (ele < stacks->a.capacity - 5)
-			stack_push(stacks, 'b');
+			stack_pb(stacks);
 		else
-			stack_rotate(stacks, 'a');
+			stack_ra(stacks);
 	}
 	sort(stacks);
 }
