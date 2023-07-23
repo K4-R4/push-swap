@@ -6,33 +6,43 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 18:06:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/23 12:40:52 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:24:30 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sort.h"
+#include "push_swap.h"
 
-static void	sort_2_reverse(t_deque *deq, bool to_a)
+static void	sort_2_reverse_b(t_stacks *stacks)
 {
 	long long	sta[2];
 
-	sta[0] = deque_get_at(deq, 0);
-	sta[1] = deque_get_at(deq, 1);
+	sta[0] = deque_get_at(&stacks->b, 0);
+	sta[1] = deque_get_at(&stacks->b, 1);
 	if (sta[0] < sta[1])
-		stack_swap(deq);
+		stack_sb(stacks);
 }
 
-void	sort_2(t_stacks *stacks, char cur_sta)
+void	sort_2(t_stacks *stacks, bool on_a)
 {
 	long long	sta[2];
 
-	sta[0] = stack_get_at(stacks, cur_sta, 0);
-	sta[1] = stack_get_at(stacks, cur_sta, 1);
-	if (sta[0] > sta[1])
-		stack_swap(stacks, cur_sta);
+	if (on_a)
+	{
+		sta[0] = deque_get_at(&stacks->a, 0);
+		sta[1] = deque_get_at(&stacks->a, 1);
+		if (sta[0] > sta[1])
+			stack_sa(stacks);
+	}
+	else
+	{
+		sta[0] = deque_get_at(&stacks->b, 0);
+		sta[1] = deque_get_at(&stacks->b, 1);
+		if (sta[0] > sta[1])
+			stack_sb(stacks);
+	}
 }
 
-void	sort_3(t_stacks *stacks, char cur_sta)
+void	sort_3_a(t_stacks *stacks)
 {
 	long long	sta[3];
 	long long	idx;
@@ -40,71 +50,67 @@ void	sort_3(t_stacks *stacks, char cur_sta)
 	idx = 0;
 	while (idx < 3)
 	{
-		sta[idx] = stack_get_at(stacks, cur_sta, idx);
+		sta[idx] = deque_get_at(&stacks->a, idx);
 		idx++;
 	}
 	if (sta[0] < sta[1] && sta[1] > sta[2] && sta[2] > sta[0])
 	{
-		stack_rrotate(stacks, cur_sta);
-		stack_swap(stacks, cur_sta);
+		stack_rra(stacks);
+		stack_sa(stacks);
 	}
 	else if (sta[0] > sta[1] && sta[1] < sta[2] && sta[2] > sta[0])
-		stack_swap(stacks, cur_sta);
+		stack_sa(stacks);
 	else if (sta[0] < sta[1] && sta[1] > sta[2] && sta[2] < sta[0])
-		stack_rrotate(stacks, cur_sta);
+		stack_rra(stacks);
 	else if (sta[0] > sta[1] && sta[1] < sta[2] && sta[2] < sta[0])
-		stack_rotate(stacks, cur_sta);
+		stack_ra(stacks);
 	else if (sta[0] > sta[1] && sta[1] > sta[2] && sta[2] < sta[0])
 	{
-		stack_rotate(stacks, cur_sta);
-		stack_swap(stacks, cur_sta);
+		stack_ra(stacks);
+		stack_sa(stacks);
 	}
 }
 
-void	sort_4(t_stacks *stacks, char cur_sta)
+void	sort_4_a(t_stacks *stacks)
 {
-	char		another_sta;
 	long long	pivot;
 	long long	idx;
 
-	another_sta = 'a' + (cur_sta == 'a');
-	pivot = stack_get_min_value(stacks, cur_sta, 4) + 1;
+	pivot = deque_get_min_value(&stacks->a) + 1;
 	idx = 0;
 	while (idx < 4)
 	{
-		if (stack_get_at(stacks, cur_sta, 0) > pivot)
-			stack_rotate(stacks, cur_sta);
+		if (deque_get_at(&stacks->a, 0) > pivot)
+			stack_ra(stacks);
 		else
-			stack_push(stacks, another_sta);
+			stack_pb(stacks);
 		idx++;
 	}
-	sort_2(stacks, cur_sta);
-	sort_2_reverse(stacks, another_sta);
+	sort_2(stacks, true);
+	sort_2_reverse_b(stacks);
 	idx = 0;
 	while (idx++ < 2)
-		stack_push(stacks, cur_sta);
+		stack_pa(stacks);
 }
 
-void	sort_5(t_stacks *stacks, char cur_sta)
+void	sort_5_a(t_stacks *stacks)
 {
-	char		another_sta;
 	long long	pivot;
 	long long	idx;
 
-	another_sta = 'a' + (cur_sta == 'a');
-	pivot = stack_get_min_value(stacks, cur_sta, 5) + 1;
+	pivot = deque_get_min_value(&stacks->a) + 1;
 	idx = 0;
 	while (idx < 5)
 	{
-		if (stack_get_at(stacks, cur_sta, 0) > pivot)
-			stack_rotate(stacks, cur_sta);
+		if (deque_get_at(&stacks->a, 0) > pivot)
+			stack_ra(stacks);
 		else
-			stack_push(stacks, another_sta);
+			stack_pb(stacks);
 		idx++;
 	}
-	sort_3(stacks, cur_sta);
-	sort_2_reverse(stacks, another_sta);
+	sort_3_a(stacks);
+	sort_2_reverse_b(stacks);
 	idx = 0;
 	while (idx++ < 2)
-		stack_push(stacks, cur_sta);
+		stack_pa(stacks);
 }

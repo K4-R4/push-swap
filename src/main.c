@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 23:35:34 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/19 11:19:18 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/23 18:33:06 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 	*/
 
 	sort(&stacks);
+	ft_printf("%s", stacks.instructions);
 
 	/*
 	printf("===========AFTER\n");

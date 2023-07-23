@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 15:36:44 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/23 18:32:16 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,27 @@ long long	convert_idx_to_ops(long long idx, long long sta_sz)
 		return (idx - sta_sz);
 }
 
-static void		execute_op(t_stacks *stacks, char cur_sta, long long op)
+static void		execute_op(t_stacks *stacks, long long op, bool on_a)
 {
 	// printf("OPS: %c, %lld\n", cur_sta, op);
-	if (op > 0)
-		while (op--)
-			stack_rotate(stacks, cur_sta);
+	if (on_a)
+	{
+		if (op > 0)
+			while (op--)
+				stack_ra(stacks);
+		else
+			while (op++)
+				stack_rra(stacks);
+	}
 	else
-		while (op++)
-			stack_rrotate(stacks, cur_sta);
+	{
+		if (op > 0)
+			while (op--)
+				stack_rb(stacks);
+		else
+			while (op++)
+				stack_rrb(stacks);
+	}
 }
 
 static void		compress_ops(t_stacks *stacks, long long idx)
@@ -64,14 +76,26 @@ static void		rotate_continuous(t_stacks *stacks)
 	long long	a_back;
 	long long	should_rotate;
 
-	a_front = stack_get_at(stacks, 'a', 0);
-	a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
-	should_rotate = (stack_get_at(stacks, 'a', 0) < stacks->a.capacity / 2);
-	while (a_front == a_back + 1)
+	a_front = deque_get_at(&stacks->a, 0);
+	a_back = deque_get_at(&stacks->a, stacks->a.sz - 1);
+	should_rotate = (deque_get_at(&stacks->a, 0) < stacks->a.capacity / 2);
+	if (should_rotate)
 	{
-		stack_rrotate(stacks, 'a');
-		a_front = stack_get_at(stacks, 'a', 0);
-		a_back = stack_get_at(stacks, 'a', stacks->a.sz - 1);
+		while (a_front == a_back + 1)
+		{
+			stack_ra(stacks);
+			a_front = deque_get_at(&stacks->a, 0);
+			a_back = deque_get_at(&stacks->a, stacks->a.sz - 1);
+		}
+	}
+	else
+	{
+		while (a_front == a_back + 1)
+		{
+			stack_rra(stacks);
+			a_front = deque_get_at(&stacks->a, 0);
+			a_back = deque_get_at(&stacks->a, stacks->a.sz - 1);
+		}
 	}
 }
 
@@ -87,6 +111,7 @@ void		execute_ops(t_stacks *stacks)
 		idx_b = 0;
 		min_ops = LLONG_MAX;
 		simulate_ops(stacks);
+
 		while (idx_b < stacks->b.sz)
 		{
 			//printf("alpha: %lld, beta: %lld\n", stacks->alpha[idx_b], stacks->beta[idx_b]);
@@ -99,9 +124,10 @@ void		execute_ops(t_stacks *stacks)
 			idx_b++;
 		}
 		compress_ops(stacks, min_idx_b);
-		execute_op(stacks, 'a', convert_idx_to_ops(stacks->alpha[min_idx_b], stacks->a.sz));
-		execute_op(stacks, 'b', convert_idx_to_ops(stacks->beta[min_idx_b], stacks->b.sz));
-		stack_push(stacks, 'a');
+		execute_op(stacks, convert_idx_to_ops(stacks->alpha[min_idx_b], stacks->a.sz), true);
+		execute_op(stacks, convert_idx_to_ops(stacks->beta[min_idx_b], stacks->b.sz), false);
+		stack_pa(stacks);
+
 	}
 	rotate_continuous(stacks);
 }
