@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:28:29 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 22:28:50 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 22:46:42 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool	will_overflow(const char *str)
 	return (false);
 }
 
-static bool	is_valid_number(char *nbr)
+static bool	is_number(char *nbr)
 {
 	long long	idx;
 
@@ -71,13 +71,13 @@ static bool	is_valid_number(char *nbr)
 	return (true);
 }
 
-static bool	is_valid_num_list(char **num_list)
+static bool	is_numbers(char **num_list)
 {
 	if (!*num_list)
 		return (false);
 	while (*num_list)
 	{
-		if (!is_valid_number(*num_list))
+		if (!is_number(*num_list))
 			return (false);
 		num_list++;
 	}
@@ -85,10 +85,13 @@ static bool	is_valid_num_list(char **num_list)
 }
 
 // args must be separated by space(s)
-// dup, sorted, nan, overflow
 bool	is_valid_arg(char **num_list)
 {
-	if (!is_valid_num_list(num_list))
+	if (!is_numbers(num_list))
+		return (false);
+	if (is_sorted(num_list))
+		return (false);
+	if (has_dup(num_list))
 		return (false);
 	return (true);
 }
