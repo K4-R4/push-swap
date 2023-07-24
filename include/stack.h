@@ -6,20 +6,20 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 22:15:33 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 20:47:54 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:55:54 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STACK_H
-#define STACK_H
+# define STACK_H
 
-#include "deque.h"
+# include "deque.h"
 
 typedef struct s_stacks
 {
-	bool	flag_print;
-	t_deque a;
-	t_deque b;
+	bool		flag_print;
+	t_deque		a;
+	t_deque		b;
 	long long	*alpha;
 	long long	*beta;
 	char		*instructions;

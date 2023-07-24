@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   execute_ops_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 20:47:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 05:30:41 by tkuramot         ###   ########.fr       */
+/*   Created: 2023/07/24 17:57:43 by tkuramot          #+#    #+#             */
+/*   Updated: 2023/07/24 17:57:51 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	deque_print_all(t_deque *deque)
+long long	convert_idx_to_ops(long long idx, long long sta_sz)
 {
-	for(int i = 0; i < deque->sz; i++)
-	{
-		printf("ele: %lld\n", deque_get_at(deque, i));
-	}
+	if (idx <= sta_sz / 2)
+		return (idx);
+	else
+		return (idx - sta_sz);
 }

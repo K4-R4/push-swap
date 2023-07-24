@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque_core.c                                       :+:      :+:    :+:   */
+/*   deque_push_pop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:07:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/17 09:51:00 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 17:36:07 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	deque_push_back(t_deque *deque, long long data)
 	deque->sz++;
 }
 
-long long		deque_pop_front(t_deque *deque)
+long long	deque_pop_front(t_deque *deque)
 {
 	long long		data;
 
@@ -66,7 +66,7 @@ long long		deque_pop_front(t_deque *deque)
 	return (data);
 }
 
-long long		deque_pop_back(t_deque *deque)
+long long	deque_pop_back(t_deque *deque)
 {
 	long long		data;
 

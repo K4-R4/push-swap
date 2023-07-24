@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 21:36:51 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 20:46:13 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 17:37:14 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ long long	deque_get_at(t_deque *deque, long long idx)
 	if (deque_is_empty(deque))
 		return (-1);
 	if (deque->front + idx < deque->capacity)
-		return deque->buffer[deque->front + idx];
+		return (deque->buffer[deque->front + idx]);
 	else
-		return deque->buffer[(deque->front + idx) % deque->capacity];
+		return (deque->buffer[(deque->front + idx) % deque->capacity]);
 }

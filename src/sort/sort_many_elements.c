@@ -6,14 +6,15 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 11:14:16 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 17:39:37 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // Push (e - s) elements in the closed section from stack A to stack B
-static void		push_b_range(t_stacks *stacks, long long pivot_small, long long pivot_large)
+static void	push_b_range(t_stacks *stacks, long long pivot_small,
+		long long pivot_large)
 {
 	long long	n_to_push;
 	long long	sta_first;
@@ -58,7 +59,7 @@ static void	prepare_sort(t_stacks *stacks)
 	sort(stacks);
 }
 
-static void		optimize_instr(t_stacks *stacks)
+static void	optimize_instr(t_stacks *stacks)
 {
 	long long	len;
 	char		*start;

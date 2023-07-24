@@ -6,14 +6,14 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 09:07:02 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/23 13:23:25 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:58:19 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_H
-#define PUSH_H
+#ifndef SORT_H
+# define SORT_H
 
-#include "stack.h"
+# include "stack.h"
 
 void	sort(t_stacks *stacks);
 void	sort_2(t_stacks *stacks, bool on_a);

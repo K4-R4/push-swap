@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 23:35:34 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/23 18:33:06 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:59:11 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,7 @@ int	main(int argc, char **argv)
 	{
 		exit(1);
 	}
-	/*
-	printf("===========BEFORE\n");
-	printf("STACK A\n");
-	deque_print_all(&stacks.a);
-	printf("STACK B\n");
-	deque_print_all(&stacks.b);
-	*/
-
 	sort(&stacks);
 	ft_printf("%s", stacks.instructions);
-
-	/*
-	printf("===========AFTER\n");
-	printf("STACK A\n");
-	deque_print_all(&stacks.a);
-	printf("STACK B\n");
-	deque_print_all(&stacks.b);
-	*/
 	return (0);
 }

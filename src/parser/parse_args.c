@@ -6,11 +6,10 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/23 17:53:02 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 17:32:29 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "deque.h"
 #include "push_swap.h"
 
 static long long	get_arg_count(char **num_list)
@@ -23,7 +22,7 @@ static long long	get_arg_count(char **num_list)
 	return (cnt);
 }
 
-static void		compression_helper(t_stacks *stacks)
+static void	compression_helper(t_stacks *stacks)
 {
 	long long	fixed;
 	long long	idx;
@@ -45,7 +44,7 @@ static void		compression_helper(t_stacks *stacks)
 	}
 }
 
-static void		compression(t_stacks *stacks , char **num_list)
+static void	compression(t_stacks *stacks, char **num_list)
 {
 	size_t	idx;
 
@@ -58,7 +57,7 @@ static void		compression(t_stacks *stacks , char **num_list)
 	compression_helper(stacks);
 }
 
-static bool		init_stacks(t_stacks *stacks, long long capacity)
+static bool	init_stacks(t_stacks *stacks, long long capacity)
 {
 	stacks->flag_print = true;
 	deque_init(&stacks->a, capacity);
@@ -78,7 +77,7 @@ static bool		init_stacks(t_stacks *stacks, long long capacity)
 
 bool	parse_arg(t_stacks *stacks, int argc, char **argv)
 {
-	char	**num_list;
+	char		**num_list;
 	long long	capacity;
 
 	if (argc == 2)
@@ -91,7 +90,7 @@ bool	parse_arg(t_stacks *stacks, int argc, char **argv)
 	{
 		num_list = (char **)ft_calloc(argc, sizeof (char *));
 		if (!num_list)
-			return false;
+			return (false);
 		ft_memcpy(num_list, &argv[1], sizeof (char *) * (argc - 1));
 	}
 	capacity = get_arg_count(num_list);

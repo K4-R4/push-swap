@@ -20,7 +20,8 @@ SORT = sort.c \
 		sort_few_elements.c \
 		sort_many_elements.c \
 		simulate_ops.c \
-		execute_ops.c
+		execute_ops.c \
+		execute_ops_helper.c
 OBJS += $(addprefix $(SRC_DIR), $(SRCS:.c=.o))
 OBJS += $(addprefix $(PARSER_DIR), $(PARSER:.c=.o))
 OBJS += $(addprefix $(DEQUE_DIR), $(DEQUE:.c=.o))
