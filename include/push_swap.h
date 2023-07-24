@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 16:56:50 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 19:20:28 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:39:44 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 long long	convert_idx_to_ops(long long idx, long long sta_sz);
 long long	my_abs(long long nbr);
 long long	my_min(long long a, long long b);
-long long	my_exit(char *message, int exit_code);
+long long	my_exit(char *message, t_stacks *stacks, int exit_code);
 
 #endif
