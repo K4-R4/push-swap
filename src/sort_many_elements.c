@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/23 17:28:09 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 11:14:16 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,25 @@ static void	prepare_sort(t_stacks *stacks)
 	sort(stacks);
 }
 
+static void		optimize_instr(t_stacks *stacks)
+{
+	long long	len;
+	char		*start;
+
+	len = ft_strlen(stacks->instructions);
+	start = ft_strnstr(stacks->instructions, "\nrb\nra", len);
+	while (start)
+	{
+		start[1] = 'r';
+		start[2] = 'r';
+		ft_memmove(start + 4, start + 7, ft_strlen(start + 7) + 1);
+		start = ft_strnstr(stacks->instructions, "\nrb\nra", len);
+	}
+}
+
 void	sort_many(t_stacks *stacks)
 {
 	prepare_sort(stacks);
 	execute_ops(stacks);
+	optimize_instr(stacks);
 }
