@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/23 18:32:16 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 11:47:36 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void		rotate_continuous(t_stacks *stacks)
 
 	a_front = deque_get_at(&stacks->a, 0);
 	a_back = deque_get_at(&stacks->a, stacks->a.sz - 1);
-	should_rotate = (deque_get_at(&stacks->a, 0) < stacks->a.capacity / 2);
+	should_rotate = (deque_get_at(&stacks->a, 0) > stacks->a.capacity / 2);
 	if (should_rotate)
 	{
 		while (a_front == a_back + 1)
