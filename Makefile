@@ -7,6 +7,7 @@ SORT_DIR = $(SRC_DIR)sort/
 SRCS = main.c \
 		push_swap_utils.c
 PARSER = parse_args.c \
+		parse_args_helper.c \
 		validate_args.c
 DEQUE = deque_push_pop.c \
 		deque_search.c \

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 09:49:47 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 20:06:42 by tkuramot         ###   ########.fr       */
+/*   Created: 2023/07/24 19:18:41 by tkuramot          #+#    #+#             */
+/*   Updated: 2023/07/24 20:30:32 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-void	stack_save_instr(t_stacks *stacks, char *instruction)
-{
-	char	*new_instructions;
+# include "libft.h"
+# include "deque.h"
+# include "stack.h"
 
-	new_instructions = ft_strjoin(stacks->instructions, instruction);
-	if (!new_instructions)
-		my_exit(NULL, 1);
-	free(stacks->instructions);
-	stacks->instructions = new_instructions;
-}
+bool		is_valid_arg(char **num_list);
+bool		parse_arg(t_stacks *stacks, int argc, char **argv);
+long long	get_arg_count(char **num_list);
+void		compression(t_stacks *stacks, char **num_list);
+
+#endif

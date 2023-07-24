@@ -6,98 +6,96 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 17:32:29 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:30:11 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static long long	get_arg_count(char **num_list)
+static bool	init_deques(t_stacks *stacks, long long capacity)
 {
-	long long	cnt;
-
-	cnt = 0;
-	while (*num_list++)
-		cnt++;
-	return (cnt);
-}
-
-static void	compression_helper(t_stacks *stacks)
-{
-	long long	fixed;
-	long long	idx;
-	long long	cnt;
-
-	fixed = 0;
-	while (fixed < stacks->a.capacity)
-	{
-		idx = 0;
-		cnt = 0;
-		while (idx < stacks->a.capacity)
-		{
-			if (stacks->alpha[idx] < stacks->alpha[fixed])
-				cnt++;
-			idx++;
-		}
-		deque_push_back(&stacks->a, cnt);
-		fixed++;
-	}
-}
-
-static void	compression(t_stacks *stacks, char **num_list)
-{
-	size_t	idx;
-
-	idx = 0;
-	while (num_list[idx])
-	{
-		stacks->alpha[idx] = ft_atoi(num_list[idx]);
-		idx++;
-	}
-	compression_helper(stacks);
-}
-
-static bool	init_stacks(t_stacks *stacks, long long capacity)
-{
-	stacks->flag_print = true;
 	deque_init(&stacks->a, capacity);
 	if (!stacks->a.buffer)
 		return (false);
 	deque_init(&stacks->b, capacity);
 	if (!stacks->b.buffer)
+	{
+		deque_free_buffer(&stacks->a);
+		return (false);
+	}
+	return (true);
+}
+
+static bool	init_stacks(t_stacks *stacks, long long capacity)
+{
+	stacks->flag_print = true;
+	stacks->instructions = ft_calloc(1, sizeof (char));
+	if (!stacks->instructions)
+		return (false);
+	if (!init_deques(stacks, capacity))
 		return (false);
 	stacks->alpha = (long long *)ft_calloc(capacity, sizeof (long long));
 	if (!stacks->alpha)
 		return (false);
 	stacks->beta = (long long *)ft_calloc(capacity, sizeof (long long));
 	if (!stacks->beta)
+	{
+		free(stacks->alpha);
 		return (false);
+	}
 	return (true);
 }
 
-bool	parse_arg(t_stacks *stacks, int argc, char **argv)
+static char	**extract_num_list(int argc, char **argv, bool *did_malloc)
 {
 	char		**num_list;
-	long long	capacity;
 
 	if (argc == 2)
 	{
 		num_list = ft_split(argv[1], ' ');
 		if (!num_list)
-			return (false);
+			return (NULL);
+		*did_malloc = true;
 	}
 	else
 	{
 		num_list = (char **)ft_calloc(argc, sizeof (char *));
 		if (!num_list)
-			return (false);
+			return (NULL);
 		ft_memcpy(num_list, &argv[1], sizeof (char *) * (argc - 1));
+		*did_malloc = false;
 	}
+	return (num_list);
+}
+
+static void	free_num_list(char **num_list)
+{
+	long long	idx;
+
+	idx = 0;
+	while (num_list[idx])
+		free(num_list[idx++]);
+	free(num_list);
+}
+
+bool	parse_arg(t_stacks *stacks, int argc, char **argv)
+{
+	bool		did_malloc;
+	char		**num_list;
+	long long	capacity;
+
+	num_list = extract_num_list(argc, argv, &did_malloc);
+	if (!num_list)
+		return (false);
 	capacity = get_arg_count(num_list);
-	if (!is_valid_arg(num_list))
+	if (!is_valid_arg(num_list) || !init_stacks(stacks, capacity))
+	{
+		if (did_malloc)
+			free_num_list(num_list);
 		return (false);
-	if (!init_stacks(stacks, capacity))
-		return (false);
+	}
 	compression(stacks, num_list);
+	if (did_malloc)
+		free_num_list(num_list);
 	return (true);
 }

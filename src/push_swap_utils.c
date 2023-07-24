@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 23:00:10 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/22 16:21:29 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:53:05 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ long long	my_min(long long a, long long b)
 
 long long	my_exit(char *message, int exit_code)
 {
-	ft_printf("%s", message);
+	if (message)
+		ft_printf("%s", message);
 	exit(exit_code);
 }
