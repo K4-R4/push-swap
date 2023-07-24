@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 22:14:54 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 23:16:31 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ bool	parse_arg(t_stacks *stacks, int argc, char **argv)
 	{
 		if (did_malloc)
 			free_num_list(num_list);
+		else
+			free(num_list);
 		return (false);
 	}
 	compression(stacks, num_list);

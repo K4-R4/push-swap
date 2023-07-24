@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:28:29 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 22:46:42 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 23:31:23 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static bool	is_number(char *nbr)
 	idx = 0;
 	if (nbr[idx] && nbr[idx] == '-')
 		idx++;
-	if (nbr[idx] && nbr[idx] == '0')
+	if (nbr[idx] && nbr[idx] == '0' && ft_strlen(nbr) != 1)
 		return (false);
 	while (nbr[idx])
 	{
@@ -78,7 +78,9 @@ static bool	is_numbers(char **num_list)
 	while (*num_list)
 	{
 		if (!is_number(*num_list))
+		{
 			return (false);
+		}
 		num_list++;
 	}
 	return (true);
@@ -88,8 +90,6 @@ static bool	is_numbers(char **num_list)
 bool	is_valid_arg(char **num_list)
 {
 	if (!is_numbers(num_list))
-		return (false);
-	if (is_sorted(num_list))
 		return (false);
 	if (has_dup(num_list))
 		return (false);

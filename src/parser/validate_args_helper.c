@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:33:40 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 22:46:29 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 23:33:47 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 bool	is_sorted(char **num_list)
 {
-	long long	cur;
+	int	prev;
+	int	cur;
 
-	cur = LLONG_MIN;
+	prev = ft_atoi(*num_list);
+	num_list++;
 	while (*num_list)
 	{
-		if (cur >= ft_atoi(*num_list))
+		cur = ft_atoi(*num_list);
+		if (prev >= cur)
 			return (false);
+		prev = cur;
 		num_list++;
 	}
 	return (true);
@@ -38,7 +42,10 @@ bool	has_dup(char **num_list)
 		while (num_list[j])
 		{
 			if (i == j)
+			{
+				j++;
 				continue ;
+			}
 			if (ft_atoi(num_list[i]) == ft_atoi(num_list[j]))
 				return (true);
 			j++;
