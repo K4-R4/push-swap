@@ -1,32 +1,31 @@
 NAME = push_swap
-SRCDIR = ./src/
-OBJDIR = $(SRCDIR)
+SRC_DIR = ./src/
+PARSER_DIR = $(SRC_DIR)parser/
+DEQUE_DIR = $(SRC_DIR)deque/
+STACK_DIR = $(SRC_DIR)stack/
+SORT_DIR = $(SRC_DIR)sort/
 SRCS = main.c \
-		parse_args.c \
-		validate_args.c \
-		deque_core.c \
-		deque_utils.c \
+		push_swap_utils.c
+PARSER = parse_args.c \
+		validate_args.c
+DEQUE = deque_push_pop.c \
 		deque_search.c \
-		stack_swap.c \
+		deque_utils.c
+STACK = stack_swap.c \
 		stack_push.c \
 		stack_rotate.c \
 		stack_rrotate.c \
-		stack_utils.c \
-		sort.c \
+		stack_utils.c
+SORT = sort.c \
 		sort_few_elements.c \
 		sort_many_elements.c \
 		simulate_ops.c \
-		manage_ops.c \
-		push_swap_utils.c \
-		debug.c
-OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
-
-TEST_SRCS = deque_core.c \
-		deque_utils.c \
-		stack_swap.c \
-		stack_push.c \
-		stack_rotate.c
-TEST_OBJS = $(addprefix $(OBJDIR), $(TEST_SRCS:.c=.o))
+		execute_ops.c
+OBJS += $(addprefix $(SRC_DIR), $(SRCS:.c=.o))
+OBJS += $(addprefix $(PARSER_DIR), $(PARSER:.c=.o))
+OBJS += $(addprefix $(DEQUE_DIR), $(DEQUE:.c=.o))
+OBJS += $(addprefix $(STACK_DIR), $(STACK:.c=.o))
+OBJS += $(addprefix $(SORT_DIR), $(SORT:.c=.o))
 
 CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I ./include/ -I ./libft/include/
@@ -39,8 +38,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	# $(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(INCLUDE)
-	gcc -fsanitize=address $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(INCLUDE)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(INCLUDE)
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
@@ -52,13 +50,5 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
 	$(RM) $(NAME)
-
-test: testc $(TEST_OBJS)
-	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) test.c $(TEST_OBJS) $(INCLUDE) $(LDFLAGS) -o $@
-	./test
-
-testc:
-	$(RM) test $(wildcard ./src/*.o)
 
 re: fclean all

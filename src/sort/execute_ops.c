@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:12:32 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 11:47:36 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:42:57 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ long long	convert_idx_to_ops(long long idx, long long sta_sz)
 
 static void		execute_op(t_stacks *stacks, long long op, bool on_a)
 {
-	// printf("OPS: %c, %lld\n", cur_sta, op);
 	if (on_a)
 	{
 		if (op > 0)
@@ -114,7 +113,6 @@ void		execute_ops(t_stacks *stacks)
 
 		while (idx_b < stacks->b.sz)
 		{
-			//printf("alpha: %lld, beta: %lld\n", stacks->alpha[idx_b], stacks->beta[idx_b]);
 			ops = my_abs(stacks->alpha[idx_b]) + my_abs(stacks->beta[idx_b]);
 			if (ops < min_ops)
 			{
