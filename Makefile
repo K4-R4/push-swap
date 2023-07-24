@@ -4,7 +4,7 @@ PARSER_DIR = $(SRC_DIR)parser/
 DEQUE_DIR = $(SRC_DIR)deque/
 STACK_DIR = $(SRC_DIR)stack/
 SORT_DIR = $(SRC_DIR)sort/
-SRCS = main.c \
+SRCS = push_swap.c \
 		push_swap_utils.c
 PARSER = parse_args.c \
 		parse_args_helper.c \
@@ -30,6 +30,9 @@ OBJS += $(addprefix $(DEQUE_DIR), $(DEQUE:.c=.o))
 OBJS += $(addprefix $(STACK_DIR), $(STACK:.c=.o))
 OBJS += $(addprefix $(SORT_DIR), $(SORT:.c=.o))
 
+BSRCS = push_swap_bonus.c
+BOBJS += $(addprefix $(SRC_DIR), $(BSRCS:.c=.o))
+
 CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I ./include/ -I ./libft/include/
 LDFLAGS = -L libft -l ft
@@ -48,12 +51,14 @@ $(NAME): $(OBJS)
 
 clean:
 	$(MAKE) -C $(LIBFT) clean
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BOBJS)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
 	$(RM) $(NAME)
 
-bonus:
+bonus: $(BOBJS)
+	$(MAKE) -C $(LIBFT)
+	$(CC) $(CFLAGS) -o my_checker $(BOBJS) $(LDFLAGS) $(INCLUDE)
 
 re: fclean all
