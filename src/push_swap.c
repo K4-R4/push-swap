@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 23:35:34 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 23:15:05 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:12:22 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	main(int argc, char **argv)
 
 	stacks.initialized = false;
 	if (argc <= 1)
-		my_exit(NULL, &stacks, 1);
+		my_exit(STDOUT_FILENO, NULL, &stacks, 1);
 	if (!parse_arg(&stacks, argc, argv))
-		my_exit("Error\n", &stacks, 1);
+		my_exit(STDERR_FILENO, "Error\n", &stacks, 1);
 	sort(&stacks);
 	ft_printf("%s", stacks.instructions);
-	my_exit(NULL, &stacks, 0);
+	my_exit(STDOUT_FILENO, NULL, &stacks, 0);
 }

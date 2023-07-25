@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   push_swap_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 23:00:10 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/25 19:11:28 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:42:52 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ long long	my_exit(int fd, char *message, t_stacks *stacks, int exit_code)
 	if (stacks->initialized)
 		free_stacks(stacks);
 	exit(exit_code);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return ((const unsigned char)*s1 - (const unsigned char)*s2);
 }

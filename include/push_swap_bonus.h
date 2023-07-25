@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 09:49:47 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/25 19:13:18 by tkuramot         ###   ########.fr       */
+/*   Created: 2023/07/24 16:56:50 by tkuramot          #+#    #+#             */
+/*   Updated: 2023/07/25 20:02:59 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
-void	stack_save_instr(t_stacks *stacks, char *instruction)
-{
-	char	*new_instructions;
+int			ft_strcmp(char *s1, char *s2);
 
-	new_instructions = ft_strjoin(stacks->instructions, instruction);
-	if (!new_instructions)
-		my_exit(STDERR_FILENO, "Error\n", stacks, 1);
-	free(stacks->instructions);
-	stacks->instructions = new_instructions;
-}
+#endif

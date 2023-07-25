@@ -30,8 +30,15 @@ OBJS += $(addprefix $(DEQUE_DIR), $(DEQUE:.c=.o))
 OBJS += $(addprefix $(STACK_DIR), $(STACK:.c=.o))
 OBJS += $(addprefix $(SORT_DIR), $(SORT:.c=.o))
 
-BSRCS = push_swap_bonus.c
+BSRCS = push_swap_bonus.c push_swap_utils_bonus.c
+BPARSER = parse_args_bonus.c \
+		parse_args_helper.c \
+		validate_args.c \
+		validate_args_helper.c
 BOBJS += $(addprefix $(SRC_DIR), $(BSRCS:.c=.o))
+BOBJS += $(addprefix $(PARSER_DIR), $(BPARSER:.c=.o))
+BOBJS += $(addprefix $(DEQUE_DIR), $(DEQUE:.c=.o))
+BOBJS += $(addprefix $(STACK_DIR), $(STACK:.c=.o))
 
 CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I ./include/ -I ./libft/include/
