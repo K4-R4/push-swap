@@ -62,10 +62,12 @@ clean:
 
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
-	$(RM) $(NAME)
+	$(RM) $(NAME) checker
 
-bonus: $(BOBJS)
+bonus: checker
+
+checker: $(BOBJS)
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) -o my_checker $(BOBJS) $(LDFLAGS) $(INCLUDE)
+	$(CC) $(CFLAGS) -o $@ $(BOBJS) $(LDFLAGS) $(INCLUDE)
 
 re: fclean all
