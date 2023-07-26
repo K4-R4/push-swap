@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:20:25 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/24 23:16:31 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:00:56 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,8 @@ bool	parse_arg(t_stacks *stacks, int argc, char **argv)
 	if (!num_list)
 		return (false);
 	capacity = get_arg_count(num_list);
-	if (capacity < 2)
-		return (false);
-	if (!is_valid_arg(num_list) || !init_stacks(stacks, capacity))
+	if (capacity < 2 || !is_valid_arg(num_list)
+		|| !init_stacks(stacks, capacity))
 	{
 		if (did_malloc)
 			free_num_list(num_list);
@@ -102,5 +101,7 @@ bool	parse_arg(t_stacks *stacks, int argc, char **argv)
 	compression(stacks, num_list);
 	if (did_malloc)
 		free_num_list(num_list);
+	else
+		free(num_list);
 	return (true);
 }

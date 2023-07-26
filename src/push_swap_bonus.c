@@ -6,12 +6,19 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:42:55 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/25 20:43:33 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:25:25 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "push_swap_bonus.h"
+
+/*
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q checker");
+}
+*/
 
 static char	**read_instrs(void)
 {
@@ -29,8 +36,8 @@ static char	**read_instrs(void)
 		idx++;
 		tmp = instrs;
 		instrs = (char **)ft_calloc(idx + 2, sizeof (char *));
-		instrs[idx] = get_next_line(STDIN_FILENO);
 		ft_memcpy(instrs, tmp, sizeof (char *) * idx);
+		instrs[idx] = get_next_line(STDIN_FILENO);
 		free(tmp);
 	}
 	return (instrs);
@@ -84,7 +91,7 @@ static void	execute_instrs(t_stacks *stacks, char **instrs)
 	}
 }
 
-static void	is_sorted(t_stacks *stacks)
+static bool	is_sorted(t_stacks *stacks)
 {
 	long long	idx;
 	long long	prev;
@@ -96,9 +103,10 @@ static void	is_sorted(t_stacks *stacks)
 	{
 		cur = deque_get_at(&stacks->a, idx);
 		if (prev >= cur)
-			my_exit(STDOUT_FILENO, "KO\n", stacks, 1);
+			return (false);
 		idx++;
 	}
+	return (true);
 }
 
 int	main(int argc, char **argv)
@@ -115,6 +123,8 @@ int	main(int argc, char **argv)
 	if (!instrs)
 		my_exit(STDERR_FILENO, "Error\n", &stacks, 1);
 	execute_instrs(&stacks, instrs);
-	is_sorted(&stacks);
-	my_exit(STDOUT_FILENO, "OK\n", &stacks, 0);
+	if (is_sorted(&stacks))
+		my_exit(STDOUT_FILENO, "OK\n", &stacks, 0);
+	else
+		my_exit(STDOUT_FILENO, "KO\n", &stacks, 1);
 }
