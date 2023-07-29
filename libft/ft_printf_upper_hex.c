@@ -6,34 +6,32 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 22:28:19 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/03 22:28:21 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/29 09:44:01 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static t_placeholder	get_output_length(unsigned long long digit,
-		t_placeholder ph)
+static void	get_output_length(unsigned long long digit,
+		t_placeholder *ph)
 {
-	if (ph.precision != -1 && ph.precision > (long long)digit)
-		ph.len = ph.precision;
+	if (ph->precision != -1 && ph->precision > (long long)digit)
+		ph->len = ph->precision;
 	else
-		ph.len = digit;
-	if (ph.flags & HASH)
-		ph.len += 2;
-	return (ph);
+		ph->len = digit;
+	if (ph->flags & HASH)
+		ph->len += 2;
 }
 
-static t_placeholder	adjust_padding(unsigned long long nbr, t_placeholder ph)
+static void	adjust_padding(unsigned long long nbr, t_placeholder *ph)
 {
-	if (!nbr && !ph.precision && (ph.flags & ZERO))
-		ph.padding = ' ';
-	if (ph.precision != -1 && (ph.flags & ZERO))
+	if (!nbr && !ph->precision && (ph->flags & ZERO))
+		ph->padding = ' ';
+	if (ph->precision != -1 && (ph->flags & ZERO))
 	{
-		ph.padding = ' ';
-		ph.flags ^= ZERO;
+		ph->padding = ' ';
+		ph->flags ^= ZERO;
 	}
-	return (ph);
 }
 
 size_t	ft_printf_upper_hex(unsigned long long nbr, t_placeholder ph)
@@ -43,8 +41,8 @@ size_t	ft_printf_upper_hex(unsigned long long nbr, t_placeholder ph)
 
 	l = 0;
 	digit = get_digit_count(nbr, 16);
-	ph = get_output_length(digit, ph);
-	ph = adjust_padding(nbr, ph);
+	get_output_length(digit, &ph);
+	adjust_padding(nbr, &ph);
 	if (!(ph.flags & HYPHEN) && !(ph.flags & ZERO) && ph.len < ph.width)
 		l += ft_putchar_n(ph.padding, ph.width - ph.len);
 	if (nbr && ph.flags & HASH)
