@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 23:35:34 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/29 11:19:41 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:19:43 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 		my_exit(STDOUT_FILENO, NULL, &stacks, 1);
 	if (!parse_arg(&stacks, argc, argv))
 		my_exit(STDERR_FILENO, "Error\n", &stacks, 1);
+	if (is_sorted(&stacks))
+		my_exit(STDOUT_FILENO, NULL, &stacks, 0);
 	sort(&stacks);
 	ft_printf("%s", stacks.instructions);
 	my_exit(STDOUT_FILENO, NULL, &stacks, 0);

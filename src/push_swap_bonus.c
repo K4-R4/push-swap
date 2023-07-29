@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:42:55 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/29 11:20:40 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:15:18 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,24 +89,6 @@ static void	execute_instrs(t_stacks *stacks, char **instrs)
 		execute_instrs_helper(stacks, *instrs);
 		instrs++;
 	}
-}
-
-static bool	is_sorted(t_stacks *stacks)
-{
-	long long	idx;
-	long long	prev;
-	long long	cur;
-
-	idx = 0;
-	prev = deque_get_at(&stacks->a, idx++);
-	while (idx < stacks->a.sz)
-	{
-		cur = deque_get_at(&stacks->a, idx);
-		if (prev >= cur)
-			return (false);
-		idx++;
-	}
-	return (true);
 }
 
 int	main(int argc, char **argv)
