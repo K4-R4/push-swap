@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 23:28:29 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/07/29 11:14:23 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/08/01 14:39:18 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static bool	is_number(char *nbr)
 	idx = 0;
 	if (nbr[idx] && nbr[idx] == '-')
 		idx++;
+	if (!nbr[idx])
+		return (false);
 	if (nbr[idx] && nbr[idx] == '0' && ft_strlen(nbr) != 1)
 		return (false);
 	while (nbr[idx])
